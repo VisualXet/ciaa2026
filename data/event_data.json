@@ -5,7 +5,7 @@
     "name": "CIAA2026",
     "logo": "./eventos_guardados/ciaa2026/uploads/Clipboard_10-15-2026_01.png",
     "created_at": "2026-10-15T21:47:59.202061",
-    "updated_at": "2026-10-15T21:50:00.975096",
+    "updated_at": "2026-10-15T21:50:18.929416",
     "dates": {
       "start": "2026-10-15",
       "end": "2026-10-15"
@@ -29,9 +29,9 @@
     "branch": "main",
     "html_url": "https://github.com/VisualXet/ciaa2026",
     "pages_url": "https://visualxet.github.io/ciaa2026/",
-    "last_commit_sha": "",
-    "last_synced_at": "",
-    "has_unpushed_changes": true
+    "last_commit_sha": "f7c89087757bd8d4c58bb316bc59ee77d7fc8daf",
+    "last_synced_at": "2026-10-15T21:50:18.929287",
+    "has_unpushed_changes": false
   },
   "theme": {
     "default_mode": "dark",
