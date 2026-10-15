@@ -1575,23 +1575,20 @@ function renderGridView(output, sessions, currentDay) {
         '</span>' +
       '</div>' +
 
-      // Columna 2 (solo visible si NO hay una única sala seleccionada)
-      (!isSingleRoom ? 
-        '<div class="shrink-0 hidden xs:block sm:block">' +
-          '<span class="room-badge text-[9.5px] font-bold px-1.5 py-0.5 rounded truncate max-w-[90px] sm:max-w-[120px] block border border-teal-800 bg-teal-950/60 text-teal-300">' +
-            escapeHtml(s.room || 'Sala') +
-          '</span>' +
-        '</div>' : '') +
-
-      // Columna 3: Título + Texto orientativo pequeño
+      // Columna 2: Título + Sala (cuando hay más de 1 sala) + Ponencias / Ponentes
       '<div class="flex-1 min-w-0 px-1">' +
         '<div class="font-bold text-slate-100 text-xs truncate leading-snug">' + escapeHtml(s.title) + '</div>' +
-        '<div class="flex items-center gap-1.5 text-[9.5px] text-slate-400 mt-0.5 truncate">' +
+        '<div class="flex items-center gap-1.5 text-[9.5px] text-slate-400 mt-1 truncate">' +
+          (!isSingleRoom ? 
+            '<span onclick="event.stopPropagation(); selectSingleRoom(\'' + escapeJsString(s.room || 'Sala') + '\')" title="Toca para filtrar solo esta sala" class="room-badge inline-flex items-center gap-1 text-[8.5px] font-black px-1.5 py-0.5 rounded border border-teal-700 bg-teal-950 text-teal-300 shrink-0 uppercase tracking-wide max-w-[120px] sm:max-w-[160px] cursor-pointer hover:bg-teal-900 transition shadow-xs">' +
+              '<i class="fa-solid fa-location-dot text-amber-400 text-[8px]"></i>' +
+              '<span class="truncate">' + escapeHtml(s.room || 'Sala') + '</span>' +
+            '</span>' : '') +
           (subtalks.length > 0 ? 
-            '<span class="text-teal-400 font-bold"><i class="fa-solid fa-layer-group mr-1"></i>' + subtalks.length + ' ponencias &bull; Ver info &rsaquo;</span>' : 
+            '<span class="text-teal-400 font-bold truncate"><i class="fa-solid fa-layer-group mr-1"></i>' + subtalks.length + ' ponencias &bull; Ver info &rsaquo;</span>' : 
             (speakerNames.length > 0 && globalShowSpeakers ? 
               '<span class="truncate"><i class="fa-solid fa-user-tie text-teal-400 mr-1"></i>' + escapeHtml(speakerNames[0]) + (speakerNames.length > 1 ? ' +' + (speakerNames.length - 1) : '') + '</span>' : 
-              '<span class="text-slate-500 font-medium">Actividad general</span>')) +
+              '<span class="text-slate-500 font-medium truncate">Actividad general</span>')) +
         '</div>' +
       '</div>' +
 
