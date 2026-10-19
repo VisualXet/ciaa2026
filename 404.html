@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>IV Congreso de Inteligencia Artificial de Andalucía 2026 | Panel Técnico de Salas</title>
+  <meta name="theme-color" content="#0d5952">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IV Congreso de Inteligencia Artificial de Andalucía 2026">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    
+    :root {
+      --primary: #007078;
+      --secondary: #000022;
+      --accent: #ffc700;
+      --bg-dark: #0b1329;
+      --bg-card: #16203a;
+      --text-main: #f8fafc;
+      --border-radius: 10px;
+      --font-family: 'Open Sans';
+    }
+            
+
+    * {
+      -webkit-tap-highlight-color: transparent !important;
+      outline: none !important;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Prevenir selecciones molestas en blanco al pulsar en pantallas táctiles */
+    tr, td, button, .session-card, .grid-row-item {
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-touch-callout: none;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-bottom: 85px;
+    }
+
+    .ios-touch-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+
+    /* Badges Temáticos de Tipo de Sesión */
+    .badge-mesa { background-color: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    .badge-taller { background-color: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .badge-conferencia { background-color: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .badge-simposio { background-color: #ffedd5; color: #9a3412; border: 1px solid #fed7aa; }
+    .badge-keynote { background-color: #f3e8ff; color: #581c87; border: 1px solid #d8b4fe; }
+    .badge-oral { background-color: #ccfbf1; color: #0f766e; border: 1px solid #5eead4; }
+    .badge-poster { background-color: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; }
+    .badge-default { background-color: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+
+    /* BADGES DE HORARIOS DE ALTO CONTRASTE */
+    .franja-time-badge {
+      background-color: #0f172a !important;
+      color: #fbbf24 !important;
+      border: 1px solid #334155 !important;
+    }
+
+    .card-time-badge {
+      background-color: #0f172a !important;
+      color: #fde047 !important;
+      border: 1px solid #1e293b !important;
+    }
+
+    /* ========================================================
+       MODO SALA OSCURA (LOW-LUMEN ANTI-GLARE PARA TÉCNICOS)
+       Diseñado para salas de realización y cabinas de sonido
+       ======================================================== */
+    body.dark-mode {
+      background-color: #080c14 !important;
+      color: #cbd5e1 !important;
+    }
+
+    body.dark-mode header {
+      background-color: #07191d !important;
+      border-bottom: 1px solid #115e59 !important;
+    }
+
+    body.dark-mode #schedule-output,
+    body.dark-mode #filter-drawer > div,
+    body.dark-mode .bg-white {
+      background-color: #0f172a !important;
+      border-color: #1e293b !important;
+      color: #e2e8f0 !important;
+    }
+
+    body.dark-mode .bg-slate-50,
+    body.dark-mode .bg-slate-100 {
+      background-color: #141f36 !important;
+      border-color: #1e293b !important;
+      color: #cbd5e1 !important;
+    }
+
+    body.dark-mode .bg-slate-200 {
+      background-color: #1e293b !important;
+      color: #94a3b8 !important;
+    }
+
+    body.dark-mode .text-slate-900 { color: #f1f5f9 !important; }
+    body.dark-mode .text-slate-800 { color: #e2e8f0 !important; }
+    body.dark-mode .text-slate-700 { color: #cbd5e1 !important; }
+    body.dark-mode .text-slate-600,
+    body.dark-mode .text-slate-500 { color: #94a3b8 !important; }
+    body.dark-mode .border-slate-100,
+    body.dark-mode .border-slate-200 { border-color: #1e293b !important; }
+
+    body.dark-mode .print-card {
+      background-color: #111a2e !important;
+      border-color: #1e293b !important;
+    }
+
+    body.dark-mode nav.fixed.bottom-0 {
+      background-color: rgba(15, 23, 42, 0.96) !important;
+      border-color: #1e293b !important;
+    }
+
+    body.dark-mode nav.fixed.bottom-0 button {
+      color: #94a3b8 !important;
+    }
+
+    body.dark-mode .badge-mesa { background-color: #172554 !important; color: #93c5fd !important; border-color: #1e40af !important; }
+    body.dark-mode .badge-taller { background-color: #451a03 !important; color: #fde68a !important; border-color: #92400e !important; }
+    body.dark-mode .badge-conferencia { background-color: #1e1b4b !important; color: #c7d2fe !important; border-color: #3730a3 !important; }
+    body.dark-mode .badge-simposio { background-color: #431407 !important; color: #fed7aa !important; border-color: #9a3412 !important; }
+    body.dark-mode .badge-keynote { background-color: #3b0764 !important; color: #d8b4fe !important; border-color: #6b21a8 !important; }
+    body.dark-mode .badge-default { background-color: #1e293b !important; color: #94a3b8 !important; border-color: #334155 !important; }
+
+    body.dark-mode .franja-time-badge {
+      background-color: #020617 !important;
+      color: #fde047 !important;
+      border-color: #0ea5e9 !important;
+    }
+
+    body.dark-mode .card-time-badge {
+      background-color: #020617 !important;
+      color: #38bdf8 !important;
+      border-color: #0284c7 !important;
+    }
+
+    /* ESTILO OSCURO DE TARJETAS Y PONENCIAS (LOW-LUMEN ANTI-DESLUMBRAMIENTO) */
+    body.dark-mode .session-card {
+      background-color: #0d1527 !important;
+      border-color: #1e293b !important;
+      color: #f1f5f9 !important;
+    }
+
+    body.dark-mode .subtalk-box {
+      background-color: #152035 !important;
+      border-color: #24344d !important;
+      color: #cbd5e1 !important;
+    }
+
+    body.dark-mode .room-badge {
+      background-color: #042f2e !important;
+      color: #5eead4 !important;
+      border-color: #115e59 !important;
+    }
+
+    body.dark-mode .tech-action-btn {
+      background-color: #162032 !important;
+      border-color: #24344d !important;
+      color: #cbd5e1 !important;
+    }
+
+    body.dark-mode .tech-action-btn:hover {
+      background-color: #24344d !important;
+      color: #ffffff !important;
+    }
+
+    /* Estilos de Salas en Línea (Compactas y Flexibles) */
+    .room-row-item {
+      min-height: 40px;
+    }
+    body.dark-mode .room-row-item {
+      background-color: #0f172a !important;
+      border-color: #1e293b !important;
+      color: #e2e8f0 !important;
+    }
+    body.dark-mode .room-row-item.is-selected {
+      background-color: #042f2e !important;
+      border-color: #14b8a6 !important;
+    }
+    body.dark-mode .room-row-item .room-title {
+      color: #f8fafc !important;
+    }
+
+    /* Indicador EN VIVO */
+    .session-is-live {
+      border: 2px solid #ef4444 !important;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.35) !important;
+      position: relative;
+    }
+    .session-is-next {
+      border: 2px solid #f59e0b !important;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.25) !important;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- ENCABEZADO PRINCIPAL TÉCNICO -->
+  <header class="bg-teal-900 text-white shadow-md sticky top-0 z-30 pt-safe w-full">
+    <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-1.5 w-full">
+      <!-- Lado izquierdo: Logo / Título del Evento con truncado seguro para móviles -->
+      <div class="flex items-center gap-2 min-w-0 flex-1">
+        <div id="header-logo-container" class="shrink-0 flex items-center">
+          <img id="header-event-logo" src="img/logo.png" alt="Logo Evento" class="h-9 sm:h-12 w-auto max-w-[130px] sm:max-w-[180px] object-contain drop-shadow-md rounded-lg filter brightness-110">
+        </div>
+        <div class="min-w-0 flex-1">
+          <h1 class="text-xs sm:text-lg font-extrabold tracking-tight leading-tight flex items-center gap-1.5 truncate">
+            <span id="header-event-name" class="truncate">IV Congreso de Inteligencia Artificial de Andalucía 2026</span>
+            <span class="hidden sm:inline-block bg-amber-400 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded shadow-sm shrink-0">Panel Técnico</span>
+          </h1>
+          <p class="text-[10px] sm:text-xs text-teal-200 truncate flex items-center gap-1">
+            <span id="header-event-dates" class="truncate">26-10-2026 al 28-10-2026</span>
+            <span class="text-teal-400">&bull;</span>
+            <span id="clock-display" class="font-mono font-bold text-amber-300 shrink-0">00:00:00</span>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Lado derecho: Acciones de Cabecera con SOS SIEMPRE VISIBLE en móvil -->
+      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <!-- Notas Técnicas (visible en pantallas medianas+, en móvil está en la barra inferior) -->
+        <button onclick="openGlobalNotesModal()" class="hidden md:flex bg-teal-800 hover:bg-teal-700 active:bg-teal-600 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-lg shadow transition items-center gap-1.5 text-xs cursor-pointer border border-teal-700" title="Ver registro completo de notas e incidencias">
+          <i class="fa-solid fa-clipboard-list text-amber-300"></i>
+          <span>Notas Técnicas</span>
+          <span id="global-notes-count-badge" class="bg-amber-400 text-slate-900 text-[10px] px-1.5 py-0.2 rounded-full font-black">0</span>
+        </button>
+
+        <!-- Datos Técnicos de Producción y Timing -->
+        <button id="btn-production-header" onclick="openProductionModal()" class="flex bg-teal-800 hover:bg-teal-700 active:bg-teal-600 text-amber-300 font-bold px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg shadow transition items-center gap-1.5 text-xs cursor-pointer border border-teal-700 shrink-0" title="Ver Datos Técnicos de Producción, Wi-Fi y Timing">
+          <i class="fa-solid fa-tower-broadcast text-amber-300 text-sm"></i>
+          <span class="hidden sm:inline">Producción</span>
+        </button>
+
+        <!-- Modo Sala Oscura (visible en móvil y desktop) -->
+        <button id="btn-dark-mode" onclick="toggleDarkMode()" class="flex bg-teal-800 hover:bg-teal-700 active:bg-teal-600 text-amber-300 font-bold px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg shadow transition items-center gap-1.5 text-xs cursor-pointer border border-teal-700 shrink-0" title="Activar/desactivar Modo Sala Oscura">
+          <i id="theme-toggle-icon" class="fa-solid fa-moon text-amber-300 text-sm"></i>
+          <span id="theme-toggle-text" class="hidden sm:inline">Modo Sala</span>
+        </button>
+
+        <!-- BOTÓN SOS: ABRE DIÁLOGO DE ASISTENCIA TÉCNICA Y LLAMADA DIRECTA -->
+        <button id="btn-sos-header" onclick="openSosModal()" class="bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-black px-2.5 sm:px-3 py-1.5 rounded-lg shadow-md transition flex items-center gap-1.5 text-xs cursor-pointer shrink-0 border border-rose-500/50" title="SOS Soporte Técnico de Sala">
+          <i class="fa-solid fa-triangle-exclamation text-amber-300 animate-pulse"></i>
+          <span class="font-black tracking-wider">SOS</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-3 flex-grow w-full">
+    
+    <!-- SELECTOR DE DÍAS (PESTAÑAS GRANDES TIPO SEMERGEN) -->
+    <section class="mb-3">
+      <div class="flex items-center justify-between mb-1.5">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+          <i class="fa-solid fa-calendar-days text-teal-700"></i>
+          <span>Días del Congreso:</span>
+        </label>
+      </div>
+      <div id="days-selector-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <!-- Generado dinámicamente con JS -->
+      </div>
+    </section>
+
+    <!-- PANEL DE FILTROS: SEDES, BUSCADOR Y SELECCIÓN RÁPIDA "SOLO MI SALA" -->
+    <section id="filter-drawer" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden md:static md:bg-transparent md:z-auto md:block transition-opacity flex flex-col justify-end md:justify-start">
+      <div class="bg-white w-full max-h-[92vh] md:max-h-none rounded-t-3xl md:rounded-2xl shadow-2xl md:shadow-sm border border-slate-200 p-3 sm:p-4 flex flex-col gap-2.5 max-w-3xl mx-auto md:max-w-none overflow-hidden">
+        
+        <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 md:hidden shrink-0">
+          <h3 class="text-sm font-black text-slate-800 flex items-center gap-2">
+            <i class="fa-solid fa-door-open text-teal-600"></i> Selector de Salas del Congreso
+          </h3>
+          <button onclick="toggleMobileDrawer()" class="text-slate-400 hover:text-slate-800 p-1.5 text-base rounded-lg hover:bg-slate-100 transition cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="space-y-2.5 overflow-y-auto ios-touch-scroll custom-scrollbar flex-grow pr-0.5">
+          
+          <!-- Buscador en Tiempo Real -->
+          <div class="relative w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            <input type="text" id="session-search-input" oninput="handleLiveSearch(this.value)" placeholder="Buscar por ponente, título de sesión, palabra clave o sala..." 
+              class="w-full pl-8 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/50">
+            <button id="btn-clear-search" onclick="clearLiveSearch()" class="absolute right-2.5 top-2 text-slate-400 hover:text-slate-700 hidden text-xs">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+
+          <!-- LISTA DESPLEGABLE DE RESULTADOS EN TIEMPO REAL (TODOS LOS DÍAS Y SALAS) -->
+          <div id="live-search-results-box" class="hidden bg-slate-900 text-slate-100 rounded-2xl p-3 shadow-2xl border border-slate-700 max-h-80 overflow-y-auto ios-touch-scroll custom-scrollbar space-y-2">
+            <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 text-xs">
+              <span class="font-bold text-amber-400 flex items-center gap-1.5" id="live-search-counter">
+                <i class="fa-solid fa-magnifying-glass"></i> Resultados
+              </span>
+              <button onclick="clearLiveSearch()" class="text-[11px] text-slate-400 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-xmark mr-0.5"></i> Cerrar
+              </button>
+            </div>
+            <div id="live-search-list" class="space-y-1.5">
+              <!-- Rellenado dinámicamente con las sesiones coincidentes -->
+            </div>
+          </div>
+
+          <!-- Selector de Sedes (con flex-wrap automático, sin scroll horizontal) -->
+          <div id="venues-buttons-container" class="empty:hidden"></div>
+
+          <!-- PANEL ÚNICO Y LIMPIO DE SALAS EN LÍNEA -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 sm:p-3 space-y-2">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <label class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                  <i class="fa-solid fa-door-open text-teal-600"></i> Salas del Congreso:
+                </label>
+                <span id="selected-rooms-badge" class="bg-teal-100 text-teal-800 text-[10px] px-2 py-0.5 rounded-full font-bold">
+                  0 salas seleccionadas
+                </span>
+              </div>
+              <div class="flex items-center gap-2 text-xs font-bold">
+                <button onclick="selectAllRooms(true)" class="text-teal-700 hover:text-teal-900 hover:underline cursor-pointer">
+                  Ver Todas
+                </button>
+                <span class="text-slate-300">|</span>
+                <button onclick="selectAllRooms(false)" class="text-rose-600 hover:text-rose-800 hover:underline cursor-pointer">
+                  Limpiar
+                </button>
+              </div>
+            </div>
+
+            <!-- Listado único de salas interactivas EN LÍNEA (1 col en móvil, 2 cols en desktop) -->
+            <div id="rooms-grid" class="flex flex-col md:grid md:grid-cols-2 gap-1.5 w-full p-0.5 max-h-[50vh] md:max-h-none overflow-y-auto ios-touch-scroll custom-scrollbar">
+              <!-- Generado dinámicamente con JS -->
+            </div>
+
+            <!-- Botón para ver Datos de Producción & Timing desde el panel de salas -->
+            <button onclick="openProductionModal()" class="w-full mt-1 bg-white hover:bg-slate-100 text-slate-800 font-bold py-2 px-3 rounded-xl border border-slate-200 text-xs flex items-center justify-center gap-2 cursor-pointer shadow-sm transition">
+              <i class="fa-solid fa-tower-broadcast text-teal-600"></i>
+              <span>Ver Datos de Producción & Timing (Wi-Fi, Radio, Control)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de Controles de Vista -->
+        <div class="pt-2.5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <div class="flex flex-wrap items-center justify-between sm:justify-start gap-2 w-full sm:w-auto">
+            <div class="inline-flex rounded-lg p-0.5 bg-slate-100 border border-slate-200 text-xs">
+              <button id="btn-view-list" onclick="setViewMode('list')" class="px-2.5 py-1 rounded-md font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer">
+                <i class="fa-solid fa-list mr-1 text-teal-600"></i> Vista Tarjetas
+              </button>
+              <button id="btn-view-grid" onclick="setViewMode('grid')" class="px-2.5 py-1 rounded-md font-bold transition text-slate-600 hover:text-slate-900 cursor-pointer">
+                <i class="fa-solid fa-table-columns mr-1 text-teal-600"></i> Vista Parrilla
+              </button>
+            </div>
+
+            <button id="btn-toggle-compact" onclick="toggleCompactMode()" class="px-2.5 py-1 rounded-lg border border-amber-300 bg-amber-50 active:bg-amber-100 text-amber-900 text-xs font-bold shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+              <i id="icon-compact" class="fa-solid fa-compress text-amber-600"></i>
+              <span id="txt-compact">Modo Compacto</span>
+            </button>
+
+            <button id="btn-toggle-speakers" onclick="toggleAllSpeakers()" class="px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-semibold shadow-sm transition flex items-center gap-1 cursor-pointer">
+              <i class="fa-solid fa-user-tie text-teal-600"></i>
+              <span id="txt-toggle-speakers">Ver Ponentes</span>
+            </button>
+          </div>
+
+          <button onclick="toggleMobileDrawer()" class="md:hidden w-full bg-teal-800 text-white font-bold py-2 rounded-xl shadow text-xs active:bg-teal-900 cursor-pointer">
+            Ver Actividades Filtradas
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENEDOR PRINCIPAL DEL CRONOGRAMA DE SESIONES (TARJETAS) -->
+    <section id="schedule-output" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-2.5 sm:p-5 min-h-[300px] mt-3">
+      <!-- Se carga dinámicamente con JS -->
+    </section>
+
+  </main>
+
+  <!-- MODAL DE NOTAS E INCIDENCIAS DE SESIÓN -->
+  <div id="session-note-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-lg w-full overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="bg-teal-900 text-white p-3 sm:p-4 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="bg-white/10 p-2 rounded-xl">
+            <i class="fa-solid fa-note-sticky text-amber-300 text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold leading-tight" id="modal-session-room">Sala</h3>
+            <p class="text-[11px] text-teal-200" id="modal-session-time">00:00 - 00:00</p>
+          </div>
+        </div>
+        <button onclick="closeSessionNoteModal()" class="text-white/70 hover:text-white p-1.5 text-lg rounded-lg hover:bg-white/10 transition cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-4 space-y-3.5 overflow-y-auto ios-touch-scroll custom-scrollbar">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <div class="flex items-center gap-1.5 mb-1.5" id="modal-session-badges"></div>
+          <h4 class="text-xs sm:text-sm font-black text-slate-900 leading-snug" id="modal-session-title">Título</h4>
+          <p class="text-[10px] sm:text-xs text-slate-600 mt-1" id="modal-session-speakers"></p>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
+          <div>
+            <span class="text-xs font-bold text-slate-800 block">Estado de la Sesión:</span>
+            <span class="text-[11px] text-slate-500" id="modal-session-status-text">Pendiente</span>
+          </div>
+          <button id="modal-toggle-status-btn" onclick="toggleModalSessionStatus()" class="px-3 py-1.5 rounded-xl font-bold text-xs transition shadow-sm flex items-center gap-1.5 cursor-pointer bg-slate-200 text-slate-700">
+            Marcar como Terminada
+          </button>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label for="modal-note-textarea" class="text-[11px] font-bold text-slate-700 flex items-center">
+              <i class="fa-solid fa-pen-to-square text-teal-700 mr-1.5"></i> Notas e Incidencias Técnicas:
+            </label>
+            <span id="modal-note-time-info" class="text-[9px] text-slate-400 font-normal"></span>
+          </div>
+          <textarea id="modal-note-textarea" rows="4" placeholder="Escribe aquí notas sobre microfonía, proyector, retrasos, avisos de coordinación, incidencias..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/50 resize-y font-medium"></textarea>
+        </div>
+      </div>
+
+      <div class="bg-slate-50 p-3 border-t border-slate-200 flex items-center justify-between gap-2">
+        <button id="modal-delete-note-btn" onclick="deleteSessionNote()" class="text-rose-600 hover:text-rose-800 text-xs font-bold px-2.5 py-1.5 rounded-lg hover:bg-rose-50 transition cursor-pointer flex items-center gap-1 hidden">
+          <i class="fa-regular fa-trash-can"></i>
+          <span>Eliminar nota</span>
+        </button>
+        <div class="flex items-center gap-2 ml-auto">
+          <button onclick="closeSessionNoteModal()" class="px-3 py-1.5 rounded-xl text-slate-600 hover:bg-slate-200 font-bold text-xs cursor-pointer transition">
+            Cerrar
+          </button>
+          <button onclick="saveSessionNote()" class="bg-teal-800 hover:bg-teal-700 active:bg-teal-900 text-white font-bold px-4 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Guardar Nota</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL GENERAL DE REGISTRO DE NOTAS DEL CONGRESO -->
+  <div id="global-notes-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-2xl w-full overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="bg-teal-900 text-white p-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="bg-amber-400 text-slate-950 p-2 rounded-xl shadow-sm">
+            <i class="fa-solid fa-clipboard-list text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-bold leading-tight">Panel Técnico: Registro General de Notas</h3>
+            <p class="text-[10px] text-teal-200">Resumen y control de incidencias de todas las salas</p>
+          </div>
+        </div>
+        <button onclick="closeGlobalNotesModal()" class="text-white/70 hover:text-white p-1.5 text-lg rounded-lg hover:bg-white/10 transition cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+        <span class="text-xs font-black text-slate-700" id="global-notes-summary-text">0 notas registradas</span>
+        <div class="flex items-center gap-2">
+          <button onclick="exportNotesAsText()" class="text-teal-800 hover:text-teal-950 text-xs font-bold bg-white border border-slate-200 px-2.5 py-1.5 rounded-lg shadow-sm hover:bg-slate-50 flex items-center gap-1.5 cursor-pointer transition">
+            <i class="fa-solid fa-copy text-teal-600"></i> Copiar Informe
+          </button>
+          <button onclick="clearAllNotes()" class="text-rose-600 hover:text-rose-800 text-xs font-semibold hover:underline cursor-pointer">
+            Limpiar todas
+          </button>
+        </div>
+      </div>
+
+      <div class="p-4 overflow-y-auto ios-touch-scroll custom-scrollbar space-y-2.5 flex-grow" id="global-notes-list"></div>
+
+      <div class="bg-slate-50 p-2.5 border-t border-slate-200 flex justify-end">
+        <button onclick="closeGlobalNotesModal()" class="px-4 py-1.5 rounded-xl bg-teal-800 hover:bg-teal-700 text-white font-bold text-xs shadow cursor-pointer transition">
+          Cerrar Panel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST DE NOTIFICACIONES TÉCNICAS -->
+  <div id="tech-toast" class="fixed bottom-16 md:bottom-6 right-4 bg-slate-900/95 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-2.5 border border-slate-700 backdrop-blur-md">
+    <i id="tech-toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+    <span id="tech-toast-text">Acción completada</span>
+  </div>
+
+  <!-- NAVEGACIÓN INFERIOR MÓVIL (STICKY BOTTOM NAV PARA ANDROID / IPHONE) -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-1 px-1 flex justify-around items-center z-40 md:hidden no-print shadow-lg pb-safe">
+    <!-- 1. SALAS -->
+    <button onclick="toggleMobileDrawer()" class="flex flex-col items-center text-slate-700 active:text-teal-700 p-1 relative flex-1" title="Selector de Salas">
+      <i class="fa-solid fa-door-open text-base"></i>
+      <span class="text-[9px] font-bold mt-0.5">Salas</span>
+      <span id="mobile-nav-badge" class="absolute top-0 right-2 bg-amber-500 text-slate-900 text-[9px] font-extrabold px-1 rounded-full">0</span>
+    </button>
+    <!-- 2. VISTA (TARJETAS / PARRILLA) -->
+    <button id="mobile-btn-view" onclick="toggleViewModeMobile()" class="flex flex-col items-center text-slate-700 active:text-teal-700 p-1 flex-1" title="Cambiar Vista Tarjetas / Parrilla">
+      <i id="mobile-icon-view" class="fa-solid fa-table-columns text-base"></i>
+      <span id="mobile-label-view" class="text-[9px] font-bold mt-0.5">Parrilla</span>
+    </button>
+    <!-- 3. VER PONENTES -->
+    <button id="mobile-btn-speakers" onclick="toggleAllSpeakersMobile()" class="flex flex-col items-center text-slate-700 active:text-teal-700 p-1 flex-1" title="Mostrar u Ocultar Ponentes">
+      <i id="mobile-icon-speakers" class="fa-solid fa-user-tie text-base"></i>
+      <span id="mobile-label-speakers" class="text-[9px] font-bold mt-0.5">Ponentes</span>
+    </button>
+    <!-- 4. MODO COMPACTO -->
+    <button id="mobile-btn-compact" onclick="toggleCompactModeMobile()" class="flex flex-col items-center text-slate-700 active:text-teal-700 p-1 flex-1" title="Modo Compacto">
+      <i id="mobile-icon-compact" class="fa-solid fa-compress text-base"></i>
+      <span id="mobile-compact-label" class="text-[9px] font-bold mt-0.5">Compacto</span>
+    </button>
+    <!-- 5. NOTAS TÉCNICAS -->
+    <button onclick="openGlobalNotesModal()" class="flex flex-col items-center text-slate-700 active:text-teal-700 p-1 relative flex-1" title="Registro de Notas Técnicas">
+      <i class="fa-solid fa-clipboard-list text-base text-amber-500"></i>
+      <span class="text-[9px] font-bold mt-0.5">Notas</span>
+      <span id="mobile-nav-notes-badge" class="absolute top-0 right-2 bg-amber-500 text-slate-900 text-[8px] font-black px-1 rounded-full hidden">0</span>
+    </button>
+  </nav>
+
+  <!-- MODAL DETALLE COMPLETO DE SESIÓN (VENTANA POPUP PARA EVITAR DESPLAZAMIENTOS INFINITOS) -->
+  <div id="session-detail-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2.5 sm:p-4">
+    <div class="bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-700 max-w-xl w-full overflow-hidden flex flex-col max-h-[92vh]">
+      <!-- Cabecera modal -->
+      <div class="bg-slate-950 px-3.5 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 flex-wrap min-w-0">
+          <span id="detail-modal-time" class="franja-time-badge inline-flex items-center gap-1 px-2 py-0.5 rounded font-mono font-bold text-xs"></span>
+          <span id="detail-modal-type" class="text-[9px] font-black px-1.5 py-0.5 rounded uppercase"></span>
+          <span id="detail-modal-room" class="room-badge text-[10px] font-bold px-1.5 py-0.5 rounded"></span>
+        </div>
+        <button onclick="closeSessionDetailModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer shrink-0">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Cuerpo modal con scroll táctil -->
+      <div class="p-3.5 sm:p-4 overflow-y-auto ios-touch-scroll custom-scrollbar space-y-3 flex-grow">
+        <div>
+          <h2 id="detail-modal-title" class="text-sm sm:text-base font-extrabold text-white leading-snug"></h2>
+          <p id="detail-modal-details" class="text-xs text-slate-400 mt-1 leading-normal hidden"></p>
+        </div>
+
+        <!-- Moderadores -->
+        <div id="detail-modal-moderators-box" class="hidden p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 text-xs text-slate-200">
+          <strong class="text-teal-400 flex items-center gap-1.5 mb-0.5"><i class="fa-solid fa-microphone-lines"></i> Moderador(es):</strong>
+          <span id="detail-modal-moderators-text" class="text-slate-300"></span>
+        </div>
+
+        <!-- Ponentes generales (si no hay sub-ponencias) -->
+        <div id="detail-modal-speakers-box" class="hidden p-2 rounded-xl bg-slate-800/80 border border-slate-700/80 text-xs text-slate-200">
+          <strong class="text-teal-400 flex items-center gap-1.5 mb-0.5"><i class="fa-solid fa-user-tie"></i> Ponente(s):</strong>
+          <span id="detail-modal-speakers-text" class="text-slate-300"></span>
+        </div>
+
+        <!-- Listado completo de ponencias -->
+        <div id="detail-modal-talks-container" class="space-y-2">
+          <div class="text-[10px] font-black uppercase text-teal-400 tracking-wider flex items-center justify-between" id="detail-modal-talks-header">
+            <span>Ponencias del Bloque:</span>
+          </div>
+          <div id="detail-modal-talks-list" class="space-y-2"></div>
+        </div>
+
+        <!-- Nota técnica asignada -->
+        <div id="detail-modal-note-box" class="p-2.5 rounded-xl bg-amber-950/30 border border-amber-500/30 text-xs text-amber-200 hidden">
+          <div class="font-bold text-amber-400 flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-note-sticky"></i> Nota Técnica Registrada:
+          </div>
+          <p id="detail-modal-note-text" class="text-slate-200 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Pie del modal -->
+      <div class="bg-slate-950 p-3 border-t border-slate-800 flex items-center justify-between gap-2">
+        <button id="detail-modal-note-btn" onclick="" class="tech-action-btn px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-note-sticky text-amber-400"></i>
+          <span>Editar Nota</span>
+        </button>
+        <div class="flex items-center gap-2">
+          <button id="detail-modal-finish-btn" onclick="" class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-check"></i>
+            <span>Terminar</span>
+          </button>
+          <button onclick="closeSessionDetailModal()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs cursor-pointer transition">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKLIST DE MONTAJE TÉCNICO AV POR SALA -->
+  <div id="room-checklist-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[65] hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-teal-500/40 max-w-lg w-full overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Cabecera -->
+      <div class="bg-teal-900 text-white p-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="bg-teal-700/80 p-2 rounded-xl text-teal-200">
+            <i class="fa-solid fa-list-check text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-black leading-tight flex items-center gap-2">
+              <span id="checklist-room-name">Sala</span>
+              <span id="checklist-status-badge" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950">Completo</span>
+            </h3>
+            <p class="text-[11px] text-teal-200">Checklist de Montaje Técnico y Equipamiento AV</p>
+          </div>
+        </div>
+        <button onclick="closeRoomChecklistModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Contenido del Checklist -->
+      <div class="p-4 space-y-3.5 overflow-y-auto ios-touch-scroll custom-scrollbar flex-grow">
+        
+        <!-- Explicación -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-600 flex items-start gap-2">
+          <i class="fa-solid fa-info-circle text-teal-600 mt-0.5 shrink-0"></i>
+          <span>El montaje técnico se verifica habitualmente el primer día y sirve para todo el congreso. Puedes marcar elementos o añadir cambios puntuales de equipamiento.</span>
+        </div>
+
+        <!-- Acciones rápidas: Marcar todos / Limpiar -->
+        <div class="flex items-center justify-between text-xs pt-1">
+          <span class="font-bold text-slate-700 flex items-center gap-1.5" id="checklist-counter">
+            <i class="fa-solid fa-sliders text-teal-600"></i> Elementos verificados: 0/0
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleAllChecklistItems(true)" class="text-teal-700 hover:text-teal-900 font-bold hover:underline cursor-pointer">
+              Marcar Todo OK
+            </button>
+            <span class="text-slate-300">|</span>
+            <button onclick="toggleAllChecklistItems(false)" class="text-rose-600 hover:text-rose-800 font-medium hover:underline cursor-pointer">
+              Desmarcar
+            </button>
+          </div>
+        </div>
+
+        <!-- Lista de elementos del checklist con checkboxes -->
+        <div id="checklist-items-container" class="space-y-1.5">
+          <!-- Generado dinámicamente con JS -->
+        </div>
+
+        <!-- Añadir nuevo elemento personalizado -->
+        <div class="pt-2 border-t border-slate-200">
+          <label for="new-checklist-item-input" class="text-[11px] font-bold text-slate-700 block mb-1">
+            + Añadir elemento o requerimiento específico:
+          </label>
+          <div class="flex items-center gap-1.5">
+            <input type="text" id="new-checklist-item-input" placeholder="Ej: Proyector en retro, Splitter HDMI, 2ª pantalla..." class="flex-1 p-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500">
+            <button onclick="addCustomChecklistItem()" class="bg-teal-800 hover:bg-teal-700 active:bg-teal-900 text-white font-bold px-3 py-2 rounded-lg text-xs shadow-sm transition shrink-0 cursor-pointer">
+              Añadir
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie modal -->
+      <div class="bg-slate-50 p-3 border-t border-slate-200 flex items-center justify-between">
+        <span class="text-[10px] text-slate-400">Cambios guardados automáticamente</span>
+        <button onclick="closeRoomChecklistModal()" class="px-4 py-1.5 rounded-xl bg-teal-800 hover:bg-teal-700 text-white font-bold text-xs shadow cursor-pointer transition">
+          Listo
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL SOS SOPORTE TÉCNICO (MENSAJE O LLAMADA CON SALA SELECCIONADA) -->
+  <div id="sos-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[70] hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-rose-500/40 max-w-md w-full overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Cabecera de Alerta SOS -->
+      <div class="bg-gradient-to-r from-rose-700 via-rose-600 to-rose-700 text-white p-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="bg-white/20 p-2 rounded-xl">
+            <i class="fa-solid fa-triangle-exclamation text-amber-300 text-xl animate-pulse"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black leading-tight tracking-wide">SOS SOPORTE TÉCNICO</h3>
+            <p class="text-[11px] text-rose-100" id="sos-support-contact-info">Asistencia técnica inmediata de sala</p>
+          </div>
+        </div>
+        <button onclick="closeSosModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/20 transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Contenido SOS -->
+      <div class="p-4 space-y-3.5 overflow-y-auto ios-touch-scroll custom-scrollbar">
+        
+        <!-- Sala donde se necesita soporte -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <label for="sos-room-select" class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5 mb-1.5">
+            <i class="fa-solid fa-door-open text-rose-600"></i> Sala donde se necesita soporte:
+          </label>
+          <select id="sos-room-select" class="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500">
+            <!-- Rellenado dinámicamente con las salas -->
+          </select>
+          <p class="text-[10px] text-slate-500 mt-1">
+            Se preselecciona automáticamente tu sala de trabajo actual.
+          </p>
+        </div>
+
+        <!-- Caja de texto para el problema -->
+        <div>
+          <label for="sos-issue-text" class="text-xs font-bold text-slate-700 flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-comment-dots text-teal-600"></i> Describe el problema o necesidad:
+          </label>
+          <textarea id="sos-issue-text" rows="3" placeholder="Ej: No funciona el micrófono inalámbrico, proyector sin señal, falta adaptador HDMI, puntero sin pilas..." class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500 font-medium"></textarea>
+        </div>
+
+        <!-- Canal de radio si existe -->
+        <div id="sos-radio-info" class="hidden p-2 rounded-lg bg-amber-50 border border-amber-200 text-[11px] text-amber-900 flex items-center gap-2">
+          <i class="fa-solid fa-walkie-talkie text-amber-600"></i>
+          <span id="sos-radio-text">Canal de Radio</span>
+        </div>
+
+        <!-- Botones de Acción: Enviar Mensaje WhatsApp o Llamar por Teléfono -->
+        <div class="space-y-2 pt-1">
+          <!-- Opción 1: Enviar Mensaje (WhatsApp) -->
+          <button onclick="sendSosMessage('whatsapp')" class="w-full bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-black py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer border border-emerald-500">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>Enviar Mensaje por WhatsApp</span>
+          </button>
+
+          <!-- Opción 2: Llamar por Teléfono Directo -->
+          <a id="sos-phone-call-btn" href="#" class="w-full bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-black py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer border border-rose-500">
+            <i class="fa-solid fa-phone text-base animate-bounce"></i>
+            <span id="sos-phone-call-label">Llamar por Teléfono</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Pie modal -->
+      <div class="bg-slate-50 p-2.5 border-t border-slate-200 flex justify-end">
+        <button onclick="closeSosModal()" class="px-4 py-1.5 rounded-xl text-slate-600 hover:bg-slate-200 font-bold text-xs cursor-pointer transition">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DATOS TÉCNICOS DE PRODUCCIÓN Y TIMING -->
+  <div id="production-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-[65] hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl shadow-2xl border border-teal-500/40 max-w-lg w-full overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Cabecera -->
+      <div class="bg-teal-900 text-white p-3.5 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="bg-amber-400 text-slate-950 p-2 rounded-xl shadow-sm">
+            <i class="fa-solid fa-tower-broadcast text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-black leading-tight">Datos Técnicos: Producción & Timing</h3>
+            <p class="text-[11px] text-teal-200">Credenciales Wi-Fi, canales de radio, control y notas de sala</p>
+          </div>
+        </div>
+        <button onclick="closeProductionModal()" class="text-white/80 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Contenido del Modal -->
+      <div class="p-4 space-y-3.5 overflow-y-auto ios-touch-scroll custom-scrollbar flex-grow">
+        
+        <!-- Tarjetas Wi-Fi -->
+        <div class="space-y-2">
+          <label class="text-[11px] font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-wifi text-teal-600"></i> Redes Wi-Fi del Evento:
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="production-wifi-cards">
+            <!-- Rellenado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Ubicación Control Central y Radio -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <!-- Control Central -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <span class="text-[10.5px] font-bold text-slate-500 uppercase block mb-1">
+              <i class="fa-solid fa-location-dot text-rose-500 mr-1"></i> Control Central / Regiduría:
+            </span>
+            <p class="text-xs font-black text-slate-900" id="production-control-center">Ubicación</p>
+          </div>
+
+          <!-- Radio y Soporte -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3">
+            <span class="text-[10.5px] font-bold text-slate-500 uppercase block mb-1">
+              <i class="fa-solid fa-walkie-talkie text-amber-500 mr-1"></i> Canal de Radio AV:
+            </span>
+            <p class="text-xs font-black text-slate-900" id="production-radio-channel">Canal Radio</p>
+          </div>
+        </div>
+
+        <!-- Contacto Jefe Técnico con enlace directo -->
+        <div class="bg-teal-50 border border-teal-200 rounded-xl p-3 flex items-center justify-between gap-2" id="production-contact-box">
+          <div class="min-w-0">
+            <span class="text-[10.5px] font-bold text-teal-800 uppercase block">Contacto Técnico AV:</span>
+            <p class="text-xs font-black text-teal-950 truncate" id="production-contact-name">Contacto</p>
+            <p class="text-[11px] text-teal-700 font-mono" id="production-contact-phone">Teléfono</p>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <a id="production-btn-whatsapp" href="#" target="_blank" class="p-2 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition" title="Enviar WhatsApp">
+              <i class="fa-brands fa-whatsapp text-sm"></i>
+            </a>
+            <a id="production-btn-call" href="#" class="p-2 rounded-lg bg-rose-600 text-white hover:bg-rose-700 transition" title="Llamar">
+              <i class="fa-solid fa-phone text-sm"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Timing y Margen de Aviso -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-regular fa-clock text-amber-500 text-lg"></i>
+            <div>
+              <span class="text-xs font-bold text-slate-800 block">Margen de Aviso Previo (Timing):</span>
+              <span class="text-[11px] text-slate-500">Antelación para preparar atril y ponentes</span>
+            </div>
+          </div>
+          <span class="bg-amber-100 text-amber-900 border border-amber-300 font-black text-xs px-2.5 py-1 rounded-lg" id="production-timing-lead">
+            10 minutos
+          </span>
+        </div>
+
+        <!-- Notas de Producción y Montaje Completas -->
+        <div>
+          <label class="text-[11px] font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5 mb-1">
+            <i class="fa-solid fa-clipboard-list text-teal-600"></i> Notas Generales de Producción:
+          </label>
+          <div class="p-3 bg-slate-900 text-slate-200 rounded-xl text-xs font-mono whitespace-pre-wrap leading-relaxed border border-slate-800" id="production-full-notes">
+            <!-- Rellenado con config.production_notes -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pie modal -->
+      <div class="bg-slate-50 p-3 border-t border-slate-200 flex justify-end">
+        <button onclick="closeProductionModal()" class="px-4 py-1.5 rounded-xl bg-teal-800 hover:bg-teal-700 text-white font-bold text-xs shadow cursor-pointer transition">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPTS AUTÓNOMOS CON BUST DE CACHÉ PARA SMARTPHONES -->
+  <script src="data/event_data.js?v=20261019_181129"></script>
+  <script src="js/mobile.js?v=20261019_181129"></script>
+</body>
+</html>
