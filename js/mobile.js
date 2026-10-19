@@ -42,6 +42,40 @@ function safeSet(key, val) {
   } catch (e) {}
 }
 
+// Helpers para extracción segura de nombres de ponentes y moderadores (soporta strings u objetos)
+function extractPersonName(person) {
+  if (!person) return '';
+  if (typeof person === 'string') return person.trim();
+  if (typeof person === 'object') {
+    if (person.name) return String(person.name).trim();
+    if (person.speaker) return String(person.speaker).trim();
+    if (person.nombre) return String(person.nombre).trim();
+    if (person.title) return String(person.title).trim();
+  }
+  return String(person).trim();
+}
+
+function extractPeopleList(list) {
+  if (!list) return [];
+  if (typeof list === 'string') {
+    var trimmed = list.trim();
+    return trimmed ? [trimmed] : [];
+  }
+  if (Array.isArray(list)) {
+    var result = [];
+    list.forEach(function(item) {
+      var name = extractPersonName(item);
+      if (name) result.push(name);
+    });
+    return result;
+  }
+  if (typeof list === 'object') {
+    var name = extractPersonName(list);
+    return name ? [name] : [];
+  }
+  return [];
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
   initTheme();
   initClock();
@@ -836,14 +870,14 @@ function handleLiveSearch(query) {
         matchContext = 'Sala: ' + roomName + ' - ' + sessionTitle;
       }
 
-      (s.speakers || []).forEach(function(sp) {
-        if (String(sp).toLowerCase().includes(term)) {
+      extractPeopleList(s.speakers).forEach(function(sp) {
+        if (sp.toLowerCase().includes(term)) {
           matchFound = true;
           matchContext = 'Ponente: ' + sp + ' (' + sessionTitle + ')';
         }
       });
-      (s.moderators || []).forEach(function(m) {
-        if (String(m).toLowerCase().includes(term)) {
+      extractPeopleList(s.moderators).forEach(function(m) {
+        if (m.toLowerCase().includes(term)) {
           matchFound = true;
           matchContext = 'Moderador: ' + m + ' (' + sessionTitle + ')';
         }
@@ -1254,12 +1288,13 @@ function renderSchedule() {
     if (currentSearchTerm) {
       var matchTitle = (s.title || '').toLowerCase().includes(currentSearchTerm);
       var matchRoom = roomName.toLowerCase().includes(currentSearchTerm);
-      var matchMods = (s.moderators || []).join(' ').toLowerCase().includes(currentSearchTerm);
+      var matchMods = extractPeopleList(s.moderators).join(' ').toLowerCase().includes(currentSearchTerm);
+      var matchSpks = extractPeopleList(s.speakers).join(' ').toLowerCase().includes(currentSearchTerm);
       var matchTalks = (s.sub_talks || []).some(function(t) {
         return (t.title || '').toLowerCase().includes(currentSearchTerm) ||
-               (t.speaker || '').toLowerCase().includes(currentSearchTerm);
+               extractPersonName(t.speaker).toLowerCase().includes(currentSearchTerm);
       });
-      if (!matchTitle && !matchRoom && !matchMods && !matchTalks) {
+      if (!matchTitle && !matchRoom && !matchMods && !matchSpks && !matchTalks) {
         return false;
       }
     }
@@ -1394,29 +1429,14 @@ function renderCardListView(output, sessions, currentDay) {
       var subtalks = s.sub_talks || [];
 
       // Extraer y unificar todos los ponentes (tanto a nivel de sesión como de sub-ponencias)
-      var speakerNames = [];
-      if (s.speakers) {
-        if (Array.isArray(s.speakers)) {
-          s.speakers.forEach(function(sp) { if (sp && sp.trim()) speakerNames.push(sp.trim()); });
-        } else if (typeof s.speakers === 'string' && s.speakers.trim()) {
-          speakerNames.push(s.speakers.trim());
-        }
-      }
+      var speakerNames = extractPeopleList(s.speakers);
       subtalks.forEach(function(talk) {
-        if (talk.speaker && talk.speaker.trim()) {
-          speakerNames.push(talk.speaker.trim());
-        }
+        var sp = extractPersonName(talk.speaker);
+        if (sp) speakerNames.push(sp);
       });
       speakerNames = Array.from(new Set(speakerNames));
 
-      var modNames = [];
-      if (s.moderators) {
-        if (Array.isArray(s.moderators)) {
-          s.moderators.forEach(function(m) { if (m && m.trim()) modNames.push(m.trim()); });
-        } else if (typeof s.moderators === 'string' && s.moderators.trim()) {
-          modNames.push(s.moderators.trim());
-        }
-      }
+      var modNames = extractPeopleList(s.moderators);
       modNames = Array.from(new Set(modNames));
 
       var hasPeopleOrTalks = (speakerNames.length > 0 || modNames.length > 0 || subtalks.length > 0);
@@ -1571,16 +1591,10 @@ function renderGridView(output, sessions, currentDay) {
     var hasNote = !!(sessionNotesMap[s.id] && sessionNotesMap[s.id].text);
     var subtalks = s.sub_talks || [];
 
-    var speakerNames = [];
-    if (s.speakers) {
-      if (Array.isArray(s.speakers)) {
-        s.speakers.forEach(function(sp) { if (sp && sp.trim()) speakerNames.push(sp.trim()); });
-      } else if (typeof s.speakers === 'string' && s.speakers.trim()) {
-        speakerNames.push(s.speakers.trim());
-      }
-    }
+    var speakerNames = extractPeopleList(s.speakers);
     subtalks.forEach(function(talk) {
-      if (talk.speaker && talk.speaker.trim()) speakerNames.push(talk.speaker.trim());
+      var sp = extractPersonName(talk.speaker);
+      if (sp) speakerNames.push(sp);
     });
     speakerNames = Array.from(new Set(speakerNames));
 
@@ -1682,11 +1696,7 @@ function openSessionDetailModal(sessionId) {
   }
 
   // Moderadores
-  var mods = [];
-  if (sessionObj.moderators) {
-    if (Array.isArray(sessionObj.moderators)) mods = sessionObj.moderators.filter(Boolean);
-    else if (typeof sessionObj.moderators === 'string' && sessionObj.moderators.trim()) mods = [sessionObj.moderators.trim()];
-  }
+  var mods = extractPeopleList(sessionObj.moderators);
   if (modsBox && modsText) {
     if (mods.length > 0) {
       modsText.textContent = mods.join(', ');
@@ -1709,7 +1719,7 @@ function openSessionDetailModal(sessionId) {
             '<h4 class="font-bold text-slate-100 text-xs leading-snug flex-1">' + (i + 1) + '. ' + escapeHtml(talk.title || 'Ponencia') + '</h4>' +
             (talk.time_start ? '<span class="card-time-badge font-mono text-[9px] px-1.5 py-0.5 rounded shrink-0">' + talk.time_start + (talk.time_end ? ' - ' + talk.time_end : '') + '</span>' : '') +
           '</div>' +
-          (talk.speaker ? '<div class="text-[10px] text-teal-300 flex items-start gap-1.5"><i class="fa-solid fa-user-tie text-teal-400 mt-0.5 shrink-0"></i><span>' + escapeHtml(talk.speaker) + '</span></div>' : '') +
+          (talk.speaker ? '<div class="text-[10px] text-teal-300 flex items-start gap-1.5"><i class="fa-solid fa-user-tie text-teal-400 mt-0.5 shrink-0"></i><span>' + escapeHtml(extractPersonName(talk.speaker)) + '</span></div>' : '') +
           (talk.affiliation ? '<div class="text-[9.5px] text-slate-400 italic">' + escapeHtml(talk.affiliation) + '</div>' : '') +
           (talk.abstract ? '<div class="text-[10px] text-slate-300 mt-1 leading-normal bg-slate-900/60 p-2 rounded-lg border border-slate-800">' + escapeHtml(talk.abstract) + '</div>' : '') +
         '</div>';
@@ -1722,8 +1732,9 @@ function openSessionDetailModal(sessionId) {
 
   // Ponentes raíz (si no hay sub-ponencias)
   if (spkBox && spkText) {
-    if (subtalks.length === 0 && sessionObj.speakers) {
-      spkText.textContent = Array.isArray(sessionObj.speakers) ? sessionObj.speakers.join(', ') : sessionObj.speakers;
+    var rootSpks = extractPeopleList(sessionObj.speakers);
+    if (subtalks.length === 0 && rootSpks.length > 0) {
+      spkText.textContent = rootSpks.join(', ');
       spkBox.classList.remove('hidden');
     } else {
       spkBox.classList.add('hidden');
@@ -1893,9 +1904,11 @@ function openSessionNoteModal(id, e) {
   if (elTime) elTime.textContent = (session.time_start || '') + ' - ' + (session.time_end || '') + ' hs';
   if (elTitle) elTitle.textContent = session.title || '';
   if (elSpeakers) {
-    var spkText = session.speakers ? ('Ponentes: ' + session.speakers) : '';
-    if (session.moderators && session.moderators.length) {
-      spkText = (spkText ? spkText + ' | ' : '') + 'Moderadores: ' + session.moderators.join(', ');
+    var spkList = extractPeopleList(session.speakers);
+    var spkText = spkList.length ? ('Ponentes: ' + spkList.join(', ')) : '';
+    var modList = extractPeopleList(session.moderators);
+    if (modList.length) {
+      spkText = (spkText ? spkText + ' | ' : '') + 'Moderadores: ' + modList.join(', ');
     }
     elSpeakers.textContent = spkText;
   }
