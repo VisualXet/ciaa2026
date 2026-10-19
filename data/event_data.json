@@ -5,7 +5,7 @@
     "name": "IV Congreso de Inteligencia Artificial de Andalucía 2026",
     "logo": "./eventos_guardados/ciaa2026/uploads/Clipboard_10-15-2026_01.png",
     "created_at": "2026-10-15T21:47:59.202061",
-    "updated_at": "2026-10-19T11:43:24.428959",
+    "updated_at": "2026-10-19T11:43:44.607591",
     "dates": {
       "start": "2026-10-26",
       "end": "2026-10-28"
@@ -37,8 +37,8 @@
     "branch": "main",
     "html_url": "https://github.com/VisualXet/ciaa2026",
     "pages_url": "https://visualxet.github.io/ciaa2026/",
-    "last_commit_sha": "ac4fe743fb653bb6b83c9fe30a1c4cf2f879eabf",
-    "last_synced_at": "2026-10-15T22:19:08.445975",
+    "last_commit_sha": "f14f70551e47e31989221fba3aea323e05b21608",
+    "last_synced_at": "2026-10-19T11:43:44.607467",
     "has_unpushed_changes": false
   },
   "theme": {

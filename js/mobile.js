@@ -18,7 +18,12 @@ var finishedSessionsMap = {};
 var sessionNotesMap = {};
 var currentEditingSessionId = null;
 
-// Helpers de almacenamiento local seguro
+// Helpers de almacenamiento local seguro aislados por evento
+function getEventStorageKey(baseKey) {
+  var eventId = (eventData && eventData.metadata && eventData.metadata.id) ? eventData.metadata.id : 'default';
+  return eventId + '_' + baseKey;
+}
+
 function safeGet(key, defaultVal) {
   try {
     if (typeof localStorage !== 'undefined' && localStorage !== null) {
@@ -41,10 +46,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   initTheme();
   initClock();
 
-  finishedSessionsMap = safeGet('event_finished_sessions_v1', {});
-  sessionNotesMap = safeGet('event_session_notes_v1', {});
-  isCompactView = safeGet('event_compact_view_v1', false);
-
   if (!eventData) {
     try {
       var res = await fetch('data/event_data.json');
@@ -53,6 +54,11 @@ document.addEventListener('DOMContentLoaded', async function() {
       console.warn("No se pudo cargar event_data.json local.");
     }
   }
+
+  // Inicializar estados con claves estrictamente aisladas para cada congreso
+  finishedSessionsMap = safeGet(getEventStorageKey('finished_sessions_v1'), {});
+  sessionNotesMap = safeGet(getEventStorageKey('session_notes_v1'), {});
+  isCompactView = safeGet(getEventStorageKey('compact_view_v1'), false);
 
   if (eventData) {
     initApp();
@@ -325,12 +331,16 @@ function setupRoomsAndVenues() {
     venuesMap[venueKey].rooms.push(room);
   });
 
-  // Cargar salas seleccionadas previas
-  var savedRooms = safeGet('event_selected_rooms_v1', null);
-  if (savedRooms && Array.isArray(savedRooms) && savedRooms.length > 0) {
-    selectedRooms = savedRooms;
+  // Cargar salas seleccionadas previas aisladas por evento y validadas estrictamente
+  var savedRooms = safeGet(getEventStorageKey('selected_rooms_v1'), null);
+  var validSavedRooms = (savedRooms && Array.isArray(savedRooms)) ? savedRooms.filter(function(r) {
+    return allRoomsList.includes(r);
+  }) : [];
+
+  if (validSavedRooms.length > 0) {
+    selectedRooms = validSavedRooms;
   } else {
-    // Por defecto todas seleccionadas
+    // Por defecto todas las salas de este congreso seleccionadas
     selectedRooms = [...allRoomsList];
   }
 }
@@ -512,7 +522,7 @@ function filterByVenue(venueKey) {
   } else if (venuesMap[venueKey]) {
     selectedRooms = [...venuesMap[venueKey].rooms];
   }
-  safeSet('event_selected_rooms_v1', selectedRooms);
+  safeSet(getEventStorageKey('selected_rooms_v1'), selectedRooms);
   renderVenueButtons();
   renderRoomCards();
   renderSchedule();
@@ -534,22 +544,22 @@ var DEFAULT_CHECKLIST_TEMPLATE = [
 ];
 
 function getRoomChecklist(roomName) {
-  var allChecklists = safeGet('room_checklists_v2', {});
+  var allChecklists = safeGet(getEventStorageKey('room_checklists_v2'), {});
   if (!allChecklists[roomName]) {
     allChecklists[roomName] = {
       items: DEFAULT_CHECKLIST_TEMPLATE.map(function(name, i) {
         return { id: 'chk_' + i, text: name, checked: false };
       })
     };
-    safeSet('room_checklists_v2', allChecklists);
+    safeSet(getEventStorageKey('room_checklists_v2'), allChecklists);
   }
   return allChecklists[roomName];
 }
 
 function saveRoomChecklist(roomName, checklistData) {
-  var allChecklists = safeGet('room_checklists_v2', {});
+  var allChecklists = safeGet(getEventStorageKey('room_checklists_v2'), {});
   allChecklists[roomName] = checklistData;
-  safeSet('room_checklists_v2', allChecklists);
+  safeSet(getEventStorageKey('room_checklists_v2'), allChecklists);
   renderRoomCards();
 }
 
@@ -751,14 +761,14 @@ function toggleRoomSelection(room) {
   } else {
     selectedRooms.push(room);
   }
-  safeSet('event_selected_rooms_v1', selectedRooms);
+  safeSet(getEventStorageKey('selected_rooms_v1'), selectedRooms);
   renderRoomCards();
   renderSchedule();
 }
 
 function selectSingleRoom(roomName) {
   selectedRooms = [roomName];
-  safeSet('event_selected_rooms_v1', selectedRooms);
+  safeSet(getEventStorageKey('selected_rooms_v1'), selectedRooms);
   renderRoomCards();
   renderSchedule();
   showToast('Modo exclusivo: ' + roomName, 'fa-door-open text-teal-400');
@@ -766,7 +776,7 @@ function selectSingleRoom(roomName) {
 
 function selectAllRooms(state) {
   selectedRooms = state ? [...allRoomsList] : [];
-  safeSet('event_selected_rooms_v1', selectedRooms);
+  safeSet(getEventStorageKey('selected_rooms_v1'), selectedRooms);
   renderRoomCards();
   renderSchedule();
   showToast(state ? 'Mostrando todas las salas' : 'Filtro limpiado (0 salas)', 'fa-layer-group text-teal-400');
@@ -923,7 +933,7 @@ function goToSearchResult(dayIdx, roomName, sessionId) {
 
   if (!selectedRooms.includes(roomName)) {
     selectedRooms = [roomName];
-    safeSet('event_selected_rooms_v1', selectedRooms);
+    safeSet(getEventStorageKey('selected_rooms_v1'), selectedRooms);
     renderRoomCards();
   }
 
@@ -955,24 +965,34 @@ function openProductionModal() {
   // 1. Tarjetas Wi-Fi
   var wifiContainer = document.getElementById('production-wifi-cards');
   if (wifiContainer) {
-    var wifiStaffSSID = 'IceIceBaby';
-    var wifiStaffPass = 'VanillaIce!@';
-    var wifiPubSSID = 'uTAS-CBMS';
-    var wifiPubPass = 'microtas26';
+    var wifiStaffSSID = '--';
+    var wifiStaffPass = '--';
+    var wifiPubSSID = '--';
+    var wifiPubPass = '--';
 
     var lines = rawNotes.split('\n');
     lines.forEach(function(l) {
-      if (l.toLowerCase().includes('staff') && l.includes('Pass:')) {
-        var mPass = l.match(/Pass:\s*([^\s]+)/);
-        var mSsid = l.match(/SSID:\s*([^\s\/]+)/);
+      var low = l.toLowerCase();
+      // Wi-Fi Staff / Técnico
+      if (low.includes('staff') || low.includes('técnico') || low.includes('tecnico')) {
+        var mPass = l.match(/(?:pass|clave|contraseña)[:\s]+([^\s]+)/i);
+        var mSsid = l.match(/(?:ssid|red)[:\s]+([^\s\/]+)/i);
         if (mPass && mPass[1]) wifiStaffPass = mPass[1];
         if (mSsid && mSsid[1]) wifiStaffSSID = mSsid[1];
-      }
-      if (l.toLowerCase().includes('public') && l.includes('Pass:')) {
-        var mPass = l.match(/Pass:\s*([^\s]+)/);
-        var mSsid = l.match(/SSID:\s*([^\s\/]+)/);
+      } else if (low.includes('public') || low.includes('público') || low.includes('publico')) {
+        var mPass = l.match(/(?:pass|clave|contraseña)[:\s]+([^\s]+)/i);
+        var mSsid = l.match(/(?:ssid|red)[:\s]+([^\s\/]+)/i);
         if (mPass && mPass[1]) wifiPubPass = mPass[1];
         if (mSsid && mSsid[1]) wifiPubSSID = mSsid[1];
+      } else {
+        if (low.includes('wi-fi') || low.includes('wifi') || low.includes('red:')) {
+          var mS = l.match(/(?:wi-fi|wifi|red|ssid)[:\s]+([^\s\n,]+)/i);
+          if (mS && mS[1] && wifiStaffSSID === '--') wifiStaffSSID = mS[1];
+        }
+        if (low.includes('pass:') || low.includes('clave:')) {
+          var mP = l.match(/(?:pass|clave)[:\s]+([^\s\n,]+)/i);
+          if (mP && mP[1] && wifiStaffPass === '--') wifiStaffPass = mP[1];
+        }
       }
     });
 
@@ -980,7 +1000,7 @@ function openProductionModal() {
       '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">' +
         '<div class="flex items-center justify-between text-xs font-bold text-slate-800 mb-1">' +
           '<span class="flex items-center gap-1.5"><i class="fa-solid fa-lock text-amber-500"></i> Wi-Fi Staff / Técnico:</span>' +
-          '<button onclick="copyTextToClipboard(\'' + escapeJsString(wifiStaffPass) + '\', \'Contraseña Wi-Fi Staff\')" class="text-[10px] text-teal-700 hover:underline font-bold cursor-pointer">Copiar Clave</button>' +
+          (wifiStaffPass !== '--' ? '<button onclick="copyTextToClipboard(\'' + escapeJsString(wifiStaffPass) + '\', \'Contraseña Wi-Fi Staff\')" class="text-[10px] text-teal-700 hover:underline font-bold cursor-pointer">Copiar Clave</button>' : '') +
         '</div>' +
         '<div class="text-[11px] font-mono text-slate-600">SSID: <strong class="text-slate-900">' + escapeHtml(wifiStaffSSID) + '</strong></div>' +
         '<div class="text-[11px] font-mono text-slate-600">Pass: <strong class="text-slate-900 select-all">' + escapeHtml(wifiStaffPass) + '</strong></div>' +
@@ -989,7 +1009,7 @@ function openProductionModal() {
       '<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200">' +
         '<div class="flex items-center justify-between text-xs font-bold text-slate-800 mb-1">' +
           '<span class="flex items-center gap-1.5"><i class="fa-solid fa-wifi text-teal-600"></i> Wi-Fi Público:</span>' +
-          '<button onclick="copyTextToClipboard(\'' + escapeJsString(wifiPubPass) + '\', \'Contraseña Wi-Fi Público\')" class="text-[10px] text-teal-700 hover:underline font-bold cursor-pointer">Copiar Clave</button>' +
+          (wifiPubPass !== '--' ? '<button onclick="copyTextToClipboard(\'' + escapeJsString(wifiPubPass) + '\', \'Contraseña Wi-Fi Público\')" class="text-[10px] text-teal-700 hover:underline font-bold cursor-pointer">Copiar Clave</button>' : '') +
         '</div>' +
         '<div class="text-[11px] font-mono text-slate-600">SSID: <strong class="text-slate-900">' + escapeHtml(wifiPubSSID) + '</strong></div>' +
         '<div class="text-[11px] font-mono text-slate-600">Pass: <strong class="text-slate-900 select-all">' + escapeHtml(wifiPubPass) + '</strong></div>' +
@@ -999,12 +1019,14 @@ function openProductionModal() {
   // 2. Control Central
   var ctrlEl = document.getElementById('production-control-center');
   if (ctrlEl) {
-    var ctrlLoc = 'Zaguán Sala Falla (Planta Baja)';
+    var ctrlLoc = '--';
     var lines = rawNotes.split('\n');
     lines.forEach(function(l) {
       if (l.toLowerCase().includes('control central')) {
         var parts = l.split(':');
-        if (parts.length > 1) ctrlLoc = parts.slice(1).join(':').trim();
+        if (parts.length > 1 && parts.slice(1).join(':').trim()) {
+          ctrlLoc = parts.slice(1).join(':').trim();
+        }
       }
     });
     ctrlEl.textContent = ctrlLoc;
@@ -1013,7 +1035,7 @@ function openProductionModal() {
   // 3. Canal de Radio
   var radioEl = document.getElementById('production-radio-channel');
   if (radioEl) {
-    radioEl.textContent = support.channel_radio || 'Canal 2 (Audio/Video)';
+    radioEl.textContent = support.channel_radio || '--';
   }
 
   // 4. Contacto Jefe Técnico
@@ -1021,8 +1043,8 @@ function openProductionModal() {
   var phoneEl = document.getElementById('production-contact-phone');
   var btnWa = document.getElementById('production-btn-whatsapp');
   var btnCall = document.getElementById('production-btn-call');
-  if (nameEl) nameEl.textContent = support.contact_name || 'Fran Jefe Técnico AV';
-  if (phoneEl) phoneEl.textContent = support.phone_whatsapp || '+34 609442342';
+  if (nameEl) nameEl.textContent = support.contact_name || '--';
+  if (phoneEl) phoneEl.textContent = support.phone_whatsapp || '--';
   if (support.phone_whatsapp) {
     var clean = support.phone_whatsapp.replace(/[^0-9+]/g, '');
     if (btnWa) btnWa.href = 'https://wa.me/' + clean.replace('+', '') + '?text=' + encodeURIComponent('Hola Fran, te escribo desde la sala:');
@@ -1086,7 +1108,7 @@ function toggleViewModeMobile() {
 
 function toggleCompactMode() {
   isCompactView = !isCompactView;
-  safeSet('event_compact_view_v1', isCompactView);
+  safeSet(getEventStorageKey('compact_view_v1'), isCompactView);
   visibleSpeakersMap = {};
   var btnTxt = document.getElementById('txt-compact');
   var btnIcon = document.getElementById('icon-compact');
@@ -1806,7 +1828,7 @@ function toggleSessionFinished(id, e) {
     finishedSessionsMap[id] = { finished: true, timestamp: tStr };
     showToast('Sesión marcada como terminada (' + tStr + ' hs)', 'fa-circle-check text-emerald-400');
   }
-  safeSet('event_finished_sessions_v1', finishedSessionsMap);
+  safeSet(getEventStorageKey('finished_sessions_v1'), finishedSessionsMap);
   renderSchedule();
 }
 
@@ -1831,7 +1853,7 @@ function toggleSlotFinished(timeSlot, targetState) {
     }
   });
 
-  safeSet('event_finished_sessions_v1', finishedSessionsMap);
+  safeSet(getEventStorageKey('finished_sessions_v1'), finishedSessionsMap);
   showToast(targetState ? (count + ' sesiones marcadas como terminadas') : ('Franja ' + timeSlot + ' hs reabierta'), targetState ? 'fa-circle-check text-emerald-400' : 'fa-rotate-left text-amber-400');
   renderSchedule();
 }
@@ -1936,7 +1958,7 @@ function toggleModalSessionStatus() {
     updateModalStatusButton(true);
     showToast('Sesión marcada como terminada', 'fa-circle-check text-emerald-400');
   }
-  safeSet('event_finished_sessions_v1', finishedSessionsMap);
+  safeSet(getEventStorageKey('finished_sessions_v1'), finishedSessionsMap);
   renderSchedule();
 }
 
@@ -1958,7 +1980,7 @@ function saveSessionNote() {
     delete sessionNotesMap[currentEditingSessionId];
     showToast('Nota vacía eliminada', 'fa-trash text-slate-400');
   }
-  safeSet('event_session_notes_v1', sessionNotesMap);
+  safeSet(getEventStorageKey('session_notes_v1'), sessionNotesMap);
   updateGlobalNotesBadge();
   closeSessionNoteModal();
   renderSchedule();
@@ -1968,7 +1990,7 @@ function deleteSessionNote() {
   if (!currentEditingSessionId) return;
   if (confirm('¿Deseas eliminar la nota técnica de esta sesión?')) {
     delete sessionNotesMap[currentEditingSessionId];
-    safeSet('event_session_notes_v1', sessionNotesMap);
+    safeSet(getEventStorageKey('session_notes_v1'), sessionNotesMap);
     updateGlobalNotesBadge();
     showToast('Nota técnica eliminada', 'fa-trash text-rose-400');
     closeSessionNoteModal();
@@ -2079,7 +2101,7 @@ function exportNotesAsText() {
 function clearAllNotes() {
   if (confirm('¿Estás seguro de que deseas borrar TODAS las notas técnicas registradas? Esta acción no se puede deshacer.')) {
     sessionNotesMap = {};
-    safeSet('event_session_notes_v1', sessionNotesMap);
+    safeSet(getEventStorageKey('session_notes_v1'), sessionNotesMap);
     updateGlobalNotesBadge();
     openGlobalNotesModal();
     renderSchedule();
