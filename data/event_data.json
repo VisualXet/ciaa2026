@@ -5,7 +5,7 @@
     "name": "IV Congreso de Inteligencia Artificial de Andalucía 2026",
     "logo": "./eventos_guardados/ciaa2026/uploads/Clipboard_10-15-2026_01.png",
     "created_at": "2026-10-15T21:47:59.202061",
-    "updated_at": "2026-10-15T22:06:00.337152",
+    "updated_at": "2026-10-19T11:43:24.428959",
     "dates": {
       "start": "2026-10-26",
       "end": "2026-10-28"
@@ -15,9 +15,9 @@
   "config": {
     "export_dir": "./eventos_guardados/ciaa2026/dist",
     "tech_support": {
-      "contact_name": "Soporte Técnico AV",
-      "phone_whatsapp": "",
-      "channel_radio": ""
+      "contact_name": "FRAN Soporte Técnico AV",
+      "phone_whatsapp": "+34 609442342",
+      "channel_radio": "Canal 2 (Audio/Video)"
     },
     "production_notes": "Wi-Fi Técnicos: \nPass: \nControl Central: ",
     "warning_lead_time_minutes": 10,
@@ -37,15 +37,15 @@
     "branch": "main",
     "html_url": "https://github.com/VisualXet/ciaa2026",
     "pages_url": "https://visualxet.github.io/ciaa2026/",
-    "last_commit_sha": "301e43b28dfe610b070c7596722e6943e0dc6d2c",
-    "last_synced_at": "2026-10-15T21:50:33.550839",
+    "last_commit_sha": "ac4fe743fb653bb6b83c9fe30a1c4cf2f879eabf",
+    "last_synced_at": "2026-10-15T22:19:08.445975",
     "has_unpushed_changes": false
   },
   "theme": {
     "default_mode": "dark",
     "primary_color": "#007078",
     "secondary_color": "#000022",
-    "accent_color": "#FFC700",
+    "accent_color": "#ffc700",
     "bg_dark": "#0b1329",
     "bg_card_dark": "#16203a",
     "text_dark": "#f8fafc",
@@ -77,8 +77,228 @@
             "id": "sess-001",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "09:00",
+            "time_end": "09:25",
+            "title": "Acceso y acreditación.",
+            "moderators": [],
+            "sub_talks": []
+          },
+          {
+            "id": "sess-002",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "09:25",
+            "time_end": "09:30",
+            "title": "Apertura",
+            "moderators": [],
+            "sub_talks": []
+          },
+          {
+            "id": "sess-003",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "09:30",
+            "time_end": "09:40",
+            "title": "Intervención en directo de Pedro Duque",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "09:30",
+                "time_end": "09:40",
+                "title": "Intervención en directo de Pedro Duque",
+                "speaker": "Pedro Duque",
+                "affiliation": "astronauta, ingeniero aeronáutico y presidente de Hispasat",
+                "abstract": "Intervención en directo de Pedro Duque , astronauta, ingeniero aeronáutico y presidente de Hispasat.",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-004",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "09:40",
+            "time_end": "10:10",
+            "title": "Cine e inteligencia artificial",
+            "moderators": [
+              {
+                "name": "José Enrique Cabrero",
+                "affiliation": "Moderador"
+              }
+            ],
+            "sub_talks": []
+          },
+          {
+            "id": "sess-005",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "10:10",
+            "time_end": "10:40",
+            "title": "¿Puede matarme un algoritmo? Ponencia en la que abordamos los riesgos del uso de la IA a raíz de las últimas polémicas a nivel internacional",
+            "moderators": [],
+            "sub_talks": []
+          },
+          {
+            "id": "sess-006",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "10:40",
+            "time_end": "11:10",
+            "title": "Una visita a la Alhambra desde la nube",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "10:40",
+                "time_end": "11:10",
+                "title": "Una visita a la Alhambra desde la nube",
+                "speaker": "Desarrollo Digital",
+                "affiliation": "",
+                "abstract": "Una visita a la Alhambra desde la nube . Demostración del funcionamiento del Gemelo Digital de la Alhambra y mesa redonda sobre la importancia de las nuevas tecnologías en la gestión del patrimonio. Con el consejero de IA, Desarrollo Digital y Administración Pública, José Antonio Nieto ; la alcaldesa de Granada, Marifrán Carazo, y el director de IDEAL, Quico Chirino .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              },
+              {
+                "id": "sub-02",
+                "time_start": "10:40",
+                "time_end": "11:10",
+                "title": "Una visita a la Alhambra desde la nube",
+                "speaker": "Administración Pública",
+                "affiliation": "",
+                "abstract": "Una visita a la Alhambra desde la nube . Demostración del funcionamiento del Gemelo Digital de la Alhambra y mesa redonda sobre la importancia de las nuevas tecnologías en la gestión del patrimonio. Con el consejero de IA, Desarrollo Digital y Administración Pública, José Antonio Nieto ; la alcaldesa de Granada, Marifrán Carazo, y el director de IDEAL, Quico Chirino .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              },
+              {
+                "id": "sub-03",
+                "time_start": "10:40",
+                "time_end": "11:10",
+                "title": "Una visita a la Alhambra desde la nube",
+                "speaker": "José Antonio Nieto",
+                "affiliation": "",
+                "abstract": "Una visita a la Alhambra desde la nube . Demostración del funcionamiento del Gemelo Digital de la Alhambra y mesa redonda sobre la importancia de las nuevas tecnologías en la gestión del patrimonio. Con el consejero de IA, Desarrollo Digital y Administración Pública, José Antonio Nieto ; la alcaldesa de Granada, Marifrán Carazo, y el director de IDEAL, Quico Chirino .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              },
+              {
+                "id": "sub-04",
+                "time_start": "10:40",
+                "time_end": "11:10",
+                "title": "Una visita a la Alhambra desde la nube",
+                "speaker": "Marifrán Carazo",
+                "affiliation": "",
+                "abstract": "Una visita a la Alhambra desde la nube . Demostración del funcionamiento del Gemelo Digital de la Alhambra y mesa redonda sobre la importancia de las nuevas tecnologías en la gestión del patrimonio. Con el consejero de IA, Desarrollo Digital y Administración Pública, José Antonio Nieto ; la alcaldesa de Granada, Marifrán Carazo, y el director de IDEAL, Quico Chirino .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              },
+              {
+                "id": "sub-05",
+                "time_start": "10:40",
+                "time_end": "11:10",
+                "title": "Una visita a la Alhambra desde la nube",
+                "speaker": "Quico Chirino",
+                "affiliation": "",
+                "abstract": "Una visita a la Alhambra desde la nube . Demostración del funcionamiento del Gemelo Digital de la Alhambra y mesa redonda sobre la importancia de las nuevas tecnologías en la gestión del patrimonio. Con el consejero de IA, Desarrollo Digital y Administración Pública, José Antonio Nieto ; la alcaldesa de Granada, Marifrán Carazo, y el director de IDEAL, Quico Chirino .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-007",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "11:10",
+            "time_end": "11:40",
+            "title": "COFFEE BREAK",
+            "moderators": [],
+            "sub_talks": []
+          },
+          {
+            "id": "sess-008",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "11:40",
+            "time_end": "12:00",
+            "title": "Actividad interactiva: MagIA con Magomigue .",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "11:40",
+                "time_end": "12:00",
+                "title": "Actividad interactiva: MagIA con Magomigue .",
+                "speaker": "Magomigue",
+                "affiliation": "",
+                "abstract": "Actividad interactiva: MagIA con Magomigue .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-009",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "12:00",
+            "time_end": "12:30",
+            "title": "Los robots no saben taconear",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "12:00",
+                "time_end": "12:30",
+                "title": "Los robots no saben taconear",
+                "speaker": "bailaor",
+                "affiliation": "",
+                "abstract": "Los robots no saben taconear. Mesa redonda sobre danza y tecnología. Con el bailaor y coreógrafo Agustín Barajas . Otro artista por confirmar.",
+                "tech_requirements": "Micrófono de diadema/mano"
+              },
+              {
+                "id": "sub-02",
+                "time_start": "12:00",
+                "time_end": "12:30",
+                "title": "Los robots no saben taconear",
+                "speaker": "coreógrafo Agustín Barajas",
+                "affiliation": "",
+                "abstract": "Los robots no saben taconear. Mesa redonda sobre danza y tecnología. Con el bailaor y coreógrafo Agustín Barajas . Otro artista por confirmar.",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-010",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "12:30",
+            "time_end": "12:50",
+            "title": "Entrevista a Paul Thin",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "12:30",
+                "time_end": "12:50",
+                "title": "Entrevista a Paul Thin",
+                "speaker": "Paul Thin",
+                "affiliation": "Cantante y productor. Ganador de Tierra de Talento y finalista de Operación Triunfo",
+                "abstract": "Entrevista a Paul Thin . Cantante y productor. Ganador de Tierra de Talento y finalista de Operación Triunfo.",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-011",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "12:50",
+            "time_end": "13:20",
+            "title": "Una llave para imaginar el futuro",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "12:50",
+                "time_end": "13:20",
+                "title": "Una llave para imaginar el futuro",
+                "speaker": "Alicia Pelegrina",
+                "affiliation": "",
+                "abstract": "Una llave para imaginar el futuro. Charla interactiva de la mano del Instituto Andaluz de Astrofísica, con Alicia Pelegrina .",
+                "tech_requirements": "Micrófono de diadema/mano"
+              }
+            ]
+          },
+          {
+            "id": "sess-012",
+            "room": "Sala Manuel de Falla del Palacio de Congresos",
+            "time_start": "13:20",
             "time_end": "14:00",
-            "title": "Talking About Artificial Intelligence (TAI Granada)",
+            "title": "#FactoríaDeSueños: 40 años de Canal Sur vistos por la IA",
             "moderators": [],
             "sub_talks": []
           }
@@ -89,7 +309,7 @@
         "label": "Martes",
         "sessions": [
           {
-            "id": "sess-002",
+            "id": "sess-013",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -98,7 +318,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-012",
+            "id": "sess-023",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -107,7 +327,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-019",
+            "id": "sess-030",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -116,7 +336,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-025",
+            "id": "sess-036",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -125,7 +345,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-034",
+            "id": "sess-045",
             "room": "Mesas tecnológicas",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -134,7 +354,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-003",
+            "id": "sess-014",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -154,7 +374,7 @@
             ]
           },
           {
-            "id": "sess-004",
+            "id": "sess-015",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "10:15",
             "time_end": "10:15",
@@ -184,7 +404,7 @@
             ]
           },
           {
-            "id": "sess-005",
+            "id": "sess-016",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -204,7 +424,7 @@
             ]
           },
           {
-            "id": "sess-013",
+            "id": "sess-024",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -224,7 +444,7 @@
             ]
           },
           {
-            "id": "sess-020",
+            "id": "sess-031",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -269,7 +489,7 @@
             ]
           },
           {
-            "id": "sess-026",
+            "id": "sess-037",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -289,7 +509,7 @@
             ]
           },
           {
-            "id": "sess-035",
+            "id": "sess-046",
             "room": "Mesas tecnológicas",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -329,7 +549,7 @@
             ]
           },
           {
-            "id": "sess-036",
+            "id": "sess-047",
             "room": "Mesas tecnológicas",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -369,7 +589,7 @@
             ]
           },
           {
-            "id": "sess-037",
+            "id": "sess-048",
             "room": "Mesas tecnológicas",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -409,7 +629,7 @@
             ]
           },
           {
-            "id": "sess-038",
+            "id": "sess-049",
             "room": "Mesas tecnológicas",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -439,7 +659,7 @@
             ]
           },
           {
-            "id": "sess-039",
+            "id": "sess-050",
             "room": "Mesas tecnológicas",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -479,7 +699,7 @@
             ]
           },
           {
-            "id": "sess-014",
+            "id": "sess-025",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "12:35",
             "time_end": "12:35",
@@ -509,7 +729,7 @@
             ]
           },
           {
-            "id": "sess-027",
+            "id": "sess-038",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "12:35",
             "time_end": "12:35",
@@ -529,7 +749,7 @@
             ]
           },
           {
-            "id": "sess-006",
+            "id": "sess-017",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "12:50",
             "time_end": "12:50",
@@ -604,7 +824,7 @@
             ]
           },
           {
-            "id": "sess-021",
+            "id": "sess-032",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "12:50",
             "time_end": "12:50",
@@ -649,7 +869,7 @@
             ]
           },
           {
-            "id": "sess-028",
+            "id": "sess-039",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "13:10",
             "time_end": "13:10",
@@ -694,7 +914,7 @@
             ]
           },
           {
-            "id": "sess-015",
+            "id": "sess-026",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "13:15",
             "time_end": "13:15",
@@ -714,7 +934,7 @@
             ]
           },
           {
-            "id": "sess-007",
+            "id": "sess-018",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "14:00",
             "time_end": "14:00",
@@ -723,7 +943,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-016",
+            "id": "sess-027",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "14:00",
             "time_end": "14:00",
@@ -732,7 +952,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-022",
+            "id": "sess-033",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "14:00",
             "time_end": "14:00",
@@ -741,7 +961,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-029",
+            "id": "sess-040",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "14:00",
             "time_end": "14:00",
@@ -750,7 +970,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-008",
+            "id": "sess-019",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "15:30",
             "time_end": "15:30",
@@ -780,7 +1000,7 @@
             ]
           },
           {
-            "id": "sess-023",
+            "id": "sess-034",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "15:30",
             "time_end": "15:30",
@@ -800,7 +1020,7 @@
             ]
           },
           {
-            "id": "sess-030",
+            "id": "sess-041",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "15:30",
             "time_end": "15:30",
@@ -850,7 +1070,7 @@
             ]
           },
           {
-            "id": "sess-017",
+            "id": "sess-028",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "16:00",
             "time_end": "16:00",
@@ -861,16 +1081,26 @@
                 "id": "sub-01",
                 "time_start": "16:00",
                 "time_end": "16:00",
-                "title": "Cómo estamos caminando en la Agencia Digital de Andalucía para desarrollar software con IA de forma gobernada",
+                "title": "Intervención: Manuel Rodríguez Sáez",
                 "speaker": "Manuel Rodríguez Sáez",
-                "affiliation": "Jefe de Servicio de Gobierno TI y Calidad, Agencia Digital de Andalucía",
+                "affiliation": "Jefe del Servicio de Gobierno TI y Calidad, Agencia Digital de Andalucía",
+                "abstract": "",
+                "tech_requirements": "Micrófono"
+              },
+              {
+                "id": "sub-02",
+                "time_start": "16:00",
+                "time_end": "16:00",
+                "title": "Intervención: Daniel Martínez Sevilla",
+                "speaker": "Daniel Martínez Sevilla",
+                "affiliation": "Chief Architect, NTT Data",
                 "abstract": "",
                 "tech_requirements": "Micrófono"
               }
             ]
           },
           {
-            "id": "sess-009",
+            "id": "sess-020",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "16:05",
             "time_end": "16:05",
@@ -905,7 +1135,7 @@
             ]
           },
           {
-            "id": "sess-031",
+            "id": "sess-042",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "16:20",
             "time_end": "16:20",
@@ -950,7 +1180,7 @@
             ]
           },
           {
-            "id": "sess-018",
+            "id": "sess-029",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "16:30",
             "time_end": "16:30",
@@ -959,7 +1189,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-024",
+            "id": "sess-035",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "16:30",
             "time_end": "16:30",
@@ -1002,14 +1232,14 @@
                 "time_end": "16:30",
                 "title": "Intervención: Javier Sacristán Fresneda",
                 "speaker": "Javier Sacristán Fresneda",
-                "affiliation": "Coordinador de Proyectos e Innovación en Fundación PTS Granada, ColoquIALab.",
+                "affiliation": "Especialista en diseño UX/UI e innovación, ColoquIALab.",
                 "abstract": "",
                 "tech_requirements": "Micrófono"
               }
             ]
           },
           {
-            "id": "sess-010",
+            "id": "sess-021",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "16:55",
             "time_end": "16:55",
@@ -1029,7 +1259,7 @@
             ]
           },
           {
-            "id": "sess-032",
+            "id": "sess-043",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "17:10",
             "time_end": "17:10",
@@ -1049,7 +1279,7 @@
             ]
           },
           {
-            "id": "sess-011",
+            "id": "sess-022",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "17:25",
             "time_end": "17:25",
@@ -1085,9 +1315,9 @@
                 "id": "sub-03",
                 "time_start": "17:25",
                 "time_end": "17:25",
-                "title": "Intervención: Diego López Román",
-                "speaker": "Diego López Román",
-                "affiliation": "Director de Mercados Verticales, Telefónica",
+                "title": "Intervención: Juan Delgado Díaz-Pache",
+                "speaker": "Juan Delgado Díaz-Pache",
+                "affiliation": "Director de Estrategia de Proyectos de Inteligencia Artificial, Telefónica",
                 "abstract": "",
                 "tech_requirements": "Micrófono"
               },
@@ -1097,14 +1327,14 @@
                 "time_end": "17:25",
                 "title": "Intervención: José Muñoz Escobar",
                 "speaker": "José Muñoz Escobar",
-                "affiliation": "Head of Sales Local and Regions Gaverments, T-Systems",
+                "affiliation": "Head of Sales Local and Regions Goverments, T-Systems",
                 "abstract": "",
                 "tech_requirements": "Micrófono"
               }
             ]
           },
           {
-            "id": "sess-033",
+            "id": "sess-044",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "17:40",
             "time_end": "17:40",
@@ -1130,7 +1360,7 @@
         "label": "Miércoles",
         "sessions": [
           {
-            "id": "sess-040",
+            "id": "sess-051",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -1150,7 +1380,7 @@
             ]
           },
           {
-            "id": "sess-047",
+            "id": "sess-058",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -1180,7 +1410,37 @@
             ]
           },
           {
-            "id": "sess-061",
+            "id": "sess-067",
+            "room": "Sala Andalucía II del Palacio de Congresos",
+            "time_start": "09:00",
+            "time_end": "09:00",
+            "title": "MESA DEBATE: Del formulario al agente: Cómo la IA agéntica está reinventando el acceso a los servicios públicos",
+            "moderators": [],
+            "sub_talks": [
+              {
+                "id": "sub-01",
+                "time_start": "09:00",
+                "time_end": "09:00",
+                "title": "Intervención: Rafael Marín Nieto",
+                "speaker": "Rafael Marín Nieto",
+                "affiliation": "Director de Citizen Relationship en Región SUR, NTT DATA",
+                "abstract": "",
+                "tech_requirements": "Micrófono"
+              },
+              {
+                "id": "sub-02",
+                "time_start": "09:00",
+                "time_end": "09:00",
+                "title": "Intervención: Enrique Alonso Teruel",
+                "speaker": "Enrique Alonso Teruel",
+                "affiliation": "Director Territorio Andalucía, Salesforce",
+                "abstract": "",
+                "tech_requirements": "Micrófono"
+              }
+            ]
+          },
+          {
+            "id": "sess-073",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "09:00",
             "time_end": "09:00",
@@ -1200,7 +1460,7 @@
             ]
           },
           {
-            "id": "sess-068",
+            "id": "sess-080",
             "room": "Mesas tecnológicas",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -1240,7 +1500,7 @@
             ]
           },
           {
-            "id": "sess-069",
+            "id": "sess-081",
             "room": "Mesas tecnológicas",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -1280,7 +1540,7 @@
             ]
           },
           {
-            "id": "sess-070",
+            "id": "sess-082",
             "room": "Mesas tecnológicas",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -1320,7 +1580,7 @@
             ]
           },
           {
-            "id": "sess-071",
+            "id": "sess-083",
             "room": "Mesas tecnológicas",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -1350,7 +1610,7 @@
             ]
           },
           {
-            "id": "sess-072",
+            "id": "sess-084",
             "room": "Mesas tecnológicas",
             "time_start": "09:30",
             "time_end": "09:30",
@@ -1390,7 +1650,7 @@
             ]
           },
           {
-            "id": "sess-048",
+            "id": "sess-059",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "09:35",
             "time_end": "09:35",
@@ -1425,7 +1685,7 @@
             ]
           },
           {
-            "id": "sess-049",
+            "id": "sess-060",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "10:10",
             "time_end": "10:10",
@@ -1445,7 +1705,7 @@
             ]
           },
           {
-            "id": "sess-056",
+            "id": "sess-068",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "10:10",
             "time_end": "10:10",
@@ -1480,7 +1740,7 @@
             ]
           },
           {
-            "id": "sess-062",
+            "id": "sess-074",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "10:10",
             "time_end": "10:10",
@@ -1530,7 +1790,7 @@
             ]
           },
           {
-            "id": "sess-041",
+            "id": "sess-052",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "10:20",
             "time_end": "10:20",
@@ -1539,7 +1799,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-050",
+            "id": "sess-061",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "10:35",
             "time_end": "10:35",
@@ -1569,7 +1829,7 @@
             ]
           },
           {
-            "id": "sess-042",
+            "id": "sess-053",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "11:00",
             "time_end": "11:00",
@@ -1578,7 +1838,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-051",
+            "id": "sess-062",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "11:00",
             "time_end": "11:00",
@@ -1587,7 +1847,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-057",
+            "id": "sess-069",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "11:00",
             "time_end": "11:00",
@@ -1596,7 +1856,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-063",
+            "id": "sess-075",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "11:00",
             "time_end": "11:00",
@@ -1605,7 +1865,7 @@
             "sub_talks": []
           },
           {
-            "id": "sess-043",
+            "id": "sess-054",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "11:30",
             "time_end": "11:30",
@@ -1650,7 +1910,7 @@
             ]
           },
           {
-            "id": "sess-052",
+            "id": "sess-063",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "11:30",
             "time_end": "11:30",
@@ -1670,7 +1930,7 @@
             ]
           },
           {
-            "id": "sess-058",
+            "id": "sess-070",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "11:30",
             "time_end": "11:30",
@@ -1705,7 +1965,7 @@
             ]
           },
           {
-            "id": "sess-064",
+            "id": "sess-076",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "11:30",
             "time_end": "11:30",
@@ -1740,7 +2000,7 @@
             ]
           },
           {
-            "id": "sess-053",
+            "id": "sess-064",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -1760,7 +2020,7 @@
             ]
           },
           {
-            "id": "sess-065",
+            "id": "sess-077",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "12:00",
             "time_end": "12:00",
@@ -1820,7 +2080,7 @@
             ]
           },
           {
-            "id": "sess-059",
+            "id": "sess-071",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "12:15",
             "time_end": "12:15",
@@ -1865,7 +2125,7 @@
             ]
           },
           {
-            "id": "sess-044",
+            "id": "sess-055",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "12:20",
             "time_end": "12:20",
@@ -1910,7 +2170,7 @@
             ]
           },
           {
-            "id": "sess-054",
+            "id": "sess-065",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "12:30",
             "time_end": "12:30",
@@ -1955,7 +2215,7 @@
             ]
           },
           {
-            "id": "sess-066",
+            "id": "sess-078",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "12:50",
             "time_end": "12:50",
@@ -1975,7 +2235,7 @@
             ]
           },
           {
-            "id": "sess-045",
+            "id": "sess-056",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "13:10",
             "time_end": "13:10",
@@ -1995,7 +2255,7 @@
             ]
           },
           {
-            "id": "sess-055",
+            "id": "sess-066",
             "room": "Sala Andalucía I del Palacio de Congresos",
             "time_start": "13:20",
             "time_end": "13:20",
@@ -2040,7 +2300,7 @@
             ]
           },
           {
-            "id": "sess-067",
+            "id": "sess-079",
             "room": "Sala Andalucía III del Palacio de Congresos",
             "time_start": "13:30",
             "time_end": "13:30",
@@ -2085,7 +2345,7 @@
             ]
           },
           {
-            "id": "sess-060",
+            "id": "sess-072",
             "room": "Sala Andalucía II del Palacio de Congresos",
             "time_start": "13:40",
             "time_end": "13:40",
@@ -2130,7 +2390,7 @@
             ]
           },
           {
-            "id": "sess-046",
+            "id": "sess-057",
             "room": "Sala Manuel de Falla del Palacio de Congresos",
             "time_start": "13:50",
             "time_end": "13:50",
@@ -2145,7 +2405,7 @@
         "label": "Eventos de la comunidad",
         "sessions": [
           {
-            "id": "sess-073",
+            "id": "sess-085",
             "room": "Sala Principal",
             "time_start": "11:00",
             "time_end": "11:00",
