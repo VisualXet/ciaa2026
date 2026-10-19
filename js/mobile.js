@@ -1336,12 +1336,12 @@ function renderSchedule() {
 
 // VISTA HORARIA CON TARJETAS
 function renderCardListView(output, sessions, currentDay) {
-  // Agrupar por franja horaria
+  // Agrupar por franja horaria (por hora de inicio para agrupar sesiones simultáneas entre salas)
   var groupedByTime = {};
   var timesList = [];
 
   sessions.forEach(function(s) {
-    var timeSlot = (s.time_start || '00:00') + ' - ' + (s.time_end || '00:00');
+    var timeSlot = s.time_start || '00:00';
     if (!groupedByTime[timeSlot]) {
       groupedByTime[timeSlot] = [];
       timesList.push(timeSlot);
@@ -1853,8 +1853,9 @@ function toggleSlotFinished(timeSlot, targetState) {
   if (!currentDay) return;
 
   (currentDay.sessions || []).forEach(function(s) {
-    var slot = (s.time_start || '00:00') + ' - ' + (s.time_end || '00:00');
-    if (slot === timeSlot && (selectedRooms.length === 0 || selectedRooms.includes((s.room || '').trim()))) {
+    var slotStart = s.time_start || '00:00';
+    var slotRange = (s.time_start || '00:00') + ' - ' + (s.time_end || '00:00');
+    if ((slotStart === timeSlot || slotRange === timeSlot) && (selectedRooms.length === 0 || selectedRooms.includes((s.room || '').trim()))) {
       if (targetState) {
         finishedSessionsMap[s.id] = { finished: true, timestamp: tStr };
       } else {
