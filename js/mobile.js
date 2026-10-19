@@ -1237,6 +1237,11 @@ function toggleMobileDrawer() {
   if (drawer) drawer.classList.toggle('hidden');
 }
 
+function formatRoomName(room) {
+  if (!room) return 'S. Principal';
+  return room.trim().replace(/^Sala\s+/i, 'S. ');
+}
+
 // CLASIFICACIÓN DE BADGE POR TIPO
 function getTypeBadgeClass(title, type) {
   var text = ((type || '') + ' ' + (title || '')).toLowerCase();
@@ -1390,27 +1395,21 @@ function renderCardListView(output, sessions, currentDay) {
 
   timesList.forEach(function(timeSlot) {
     var slotSessions = groupedByTime[timeSlot];
-    var finishedCount = slotSessions.filter(function(s) { return isSessionFinished(s.id); }).length;
-    var allFinished = (slotSessions.length > 0 && finishedCount === slotSessions.length);
+    
+    // Calcular el rango horario completo de la franja (ej: 09:00 - 09:30 hs)
+    var endTimes = slotSessions.map(function(s) { return s.time_end; }).filter(Boolean).sort();
+    var slotRange = timeSlot;
+    if (endTimes.length > 0) {
+      slotRange = timeSlot + ' - ' + endTimes[endTimes.length - 1];
+    }
 
     html += '<div class="print-card bg-slate-50/80 border border-slate-200 rounded-xl p-2.5 sm:p-3">' +
       '<div class="flex items-center gap-2 mb-2 pb-2 border-b border-slate-200 flex-wrap">' +
         '<span class="franja-time-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-lg font-mono font-black text-xs sm:text-sm shadow-sm tracking-wide">' +
           '<i class="fa-regular fa-clock text-amber-400"></i>' +
-          '<span>' + timeSlot + ' hs</span>' +
+          '<span>' + slotRange + ' hs</span>' +
         '</span>' +
         '<span class="text-[10px] text-slate-500 font-semibold">(' + slotSessions.length + ' ' + (slotSessions.length === 1 ? 'sesión' : 'sesiones simultáneas') + ')</span>' +
-        '<div class="ml-auto flex items-center gap-1.5">' +
-          '<span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full ' + 
-            (allFinished ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : (finishedCount > 0 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-slate-200 text-slate-600')) + '">' +
-            finishedCount + '/' + slotSessions.length + ' terminadas' +
-          '</span>' +
-          '<button onclick="toggleSlotFinished(\'' + escapeJsString(timeSlot) + '\', ' + (!allFinished) + ')" class="text-[9px] font-bold px-2 py-0.5 rounded-lg border transition cursor-pointer ' +
-            (allFinished ? 'bg-white text-slate-700 border-slate-300 hover:bg-slate-100' : 'bg-teal-700 text-white border-teal-700 hover:bg-teal-800 shadow-sm') + '">' +
-            '<i class="fa-solid ' + (allFinished ? 'fa-rotate-left mr-1 text-slate-500' : 'fa-check mr-1 text-amber-300') + '"></i>' +
-            (allFinished ? 'Reabrir franja' : 'Finalizar franja') +
-          '</button>' +
-        '</div>' +
       '</div>' +
       '<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">';
 
@@ -1453,14 +1452,16 @@ function renderCardListView(output, sessions, currentDay) {
                   '<i class="fa-regular fa-clock text-amber-400 text-[8.5px]"></i>' +
                   '<span>' + sessionTime + '</span>' +
                 '</span>' : '') +
-              '<span class="text-[9px] font-black px-1.5 py-0.5 rounded uppercase ' + badgeClass + '">' +
-                escapeHtml(badgeLabel) +
-              '</span>' +
+              (badgeLabel && badgeLabel.toLowerCase() !== 'sesión' && badgeLabel.toLowerCase() !== 'sesion' ? 
+                '<span class="text-[9px] font-black px-1.5 py-0.5 rounded uppercase ' + badgeClass + '">' +
+                  escapeHtml(badgeLabel) +
+                '</span>' : '') +
               (isFinished ? '<span class="text-[8.5px] font-black px-1.5 py-0.5 rounded uppercase bg-emerald-600 text-white shadow-sm flex items-center gap-0.5"><i class="fa-solid fa-check"></i>Terminada</span>' : '') +
               '<span id="live-tag-' + s.id + '" class="text-[8.5px] font-black px-1.5 py-0.5 rounded uppercase hidden bg-rose-600 text-white animate-pulse">EN VIVO AHORA</span>' +
             '</div>' +
-            '<button onclick="selectSingleRoom(\'' + escapeJsString(s.room || 'Sala') + '\')" title="Clic para filtrar solo esta sala" class="room-badge text-[10px] font-black truncate max-w-[140px] px-1.5 py-0.5 rounded cursor-pointer transition border border-teal-800 bg-teal-950/60 text-teal-300 hover:bg-teal-900/60">' +
-              '<i class="fa-solid fa-location-dot text-teal-400 mr-0.5"></i>' + escapeHtml(s.room || 'Sala') +
+            '<button onclick="selectSingleRoom(\'' + escapeJsString(s.room || 'Sala') + '\')" title="Clic para filtrar solo esta sala" class="room-badge text-[10px] font-black px-2 py-0.5 rounded cursor-pointer transition border border-teal-800 bg-teal-950/60 text-teal-300 hover:bg-teal-900/60 whitespace-normal text-left inline-flex items-center gap-1 leading-tight">' +
+              '<i class="fa-solid fa-location-dot text-teal-400 shrink-0"></i>' +
+              '<span>' + escapeHtml(formatRoomName(s.room)) + '</span>' +
             '</button>' +
           '</div>' +
           '<h3 class="font-extrabold text-slate-100 text-xs leading-snug mb-1 ' + (isCompactView ? 'line-clamp-2' : '') + '">' +
@@ -1614,11 +1615,11 @@ function renderGridView(output, sessions, currentDay) {
       // Columna 2: Título + Sala (cuando hay más de 1 sala) + Ponencias / Ponentes
       '<div class="flex-1 min-w-0 px-1">' +
         '<div class="font-bold text-slate-100 text-xs truncate leading-snug">' + escapeHtml(s.title) + '</div>' +
-        '<div class="flex items-center gap-1.5 text-[9.5px] text-slate-400 mt-1 truncate">' +
+        '<div class="flex items-center gap-1.5 text-[9.5px] text-slate-400 mt-1 flex-wrap">' +
           (!isSingleRoom ? 
-            '<span onclick="event.stopPropagation(); selectSingleRoom(\'' + escapeJsString(s.room || 'Sala') + '\')" title="Toca para filtrar solo esta sala" class="room-badge inline-flex items-center gap-1 text-[8.5px] font-black px-1.5 py-0.5 rounded border border-teal-700 bg-teal-950 text-teal-300 shrink-0 uppercase tracking-wide max-w-[120px] sm:max-w-[160px] cursor-pointer hover:bg-teal-900 transition shadow-xs">' +
-              '<i class="fa-solid fa-location-dot text-amber-400 text-[8px]"></i>' +
-              '<span class="truncate">' + escapeHtml(s.room || 'Sala') + '</span>' +
+            '<span onclick="event.stopPropagation(); selectSingleRoom(\'' + escapeJsString(s.room || 'Sala') + '\')" title="Toca para filtrar solo esta sala" class="room-badge inline-flex items-center gap-1 text-[9px] font-black px-2 py-0.5 rounded border border-teal-700 bg-teal-950 text-teal-300 shrink-0 tracking-wide cursor-pointer hover:bg-teal-900 transition shadow-xs whitespace-normal">' +
+              '<i class="fa-solid fa-location-dot text-amber-400 text-[8.5px] shrink-0"></i>' +
+              '<span>' + escapeHtml(formatRoomName(s.room)) + '</span>' +
             '</span>' : '') +
           (subtalks.length > 0 ? 
             '<span class="text-teal-400 font-bold truncate"><i class="fa-solid fa-layer-group mr-1"></i>' + subtalks.length + ' ponencias &bull; Ver info &rsaquo;</span>' : 
